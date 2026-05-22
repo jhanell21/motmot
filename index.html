@@ -101,8 +101,38 @@ section{position:relative;overflow:hidden}
   transition:opacity 0.8s, transform 0.8s;
 }
 #loading-screen.hidden{opacity:0;pointer-events:none;transform:scale(1.05)}
-.loading-heart{
-  font-size:4rem;
+.loading-heart-meter{
+  position:relative;
+  width:86px;
+  height:86px;
+  display:grid;
+  place-items:center;
+  filter:drop-shadow(0 0 24px rgba(196,169,220,0.32));
+}
+.loading-heart-meter .heart-outline,
+.loading-heart-meter .heart-fill i{
+  font-size:5rem;
+  line-height:1;
+}
+.loading-heart-meter .heart-outline{
+  color:rgba(233,246,255,0.18);
+  -webkit-text-stroke:1px var(--pink);
+  animation:heartbeat 1.2s ease-in-out infinite;
+}
+.loading-heart-meter .heart-fill{
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  height:0;
+  overflow:hidden;
+  align-self:end;
+  animation:heartFill 2s ease-out forwards;
+}
+.loading-heart-meter .heart-fill i{
+  color:var(--pink);
+  position:absolute;
+  bottom:3px;
   animation:heartbeat 1.2s ease-in-out infinite;
 }
 .loading-text{
@@ -111,18 +141,7 @@ section{position:relative;overflow:hidden}
   color:var(--pink);
   letter-spacing:0.05em;
 }
-.loading-bar{
-  width:200px;height:3px;
-  background:var(--surface);
-  border-radius:10px;overflow:hidden;
-}
-.loading-fill{
-  height:100%;
-  background:var(--pink);
-  border-radius:10px;
-  animation:loadFill 2s ease-out forwards;
-}
-@keyframes loadFill{from{width:0}to{width:100%}}
+@keyframes heartFill{from{height:0}to{height:100%}}
 @keyframes heartbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 
 /* ===========================
@@ -325,6 +344,21 @@ section{position:relative;overflow:hidden}
 }
 .pw-message.error{color:#ff8fa3;animation:fadeSlide 0.3s ease}
 .pw-message.success{color:#a8e6cf}
+.pw-angry-gif{
+  display:none;
+  width:96px;
+  height:96px;
+  object-fit:contain;
+  margin:8px auto 0;
+  animation:popIn 0.25s ease, angryBounce 0.55s ease;
+}
+.pw-angry-gif.show{display:block}
+@keyframes angryBounce{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  25%{transform:translateY(-8px) rotate(-5deg)}
+  50%{transform:translateY(2px) rotate(5deg)}
+  75%{transform:translateY(-4px) rotate(-3deg)}
+}
 @keyframes fadeSlide{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .pw-hearts{
   position:absolute;inset:0;pointer-events:none;overflow:hidden;
@@ -345,11 +379,77 @@ section{position:relative;overflow:hidden}
   gap:20px;
 }
 .success-overlay.show{display:flex;animation:fadeIn 0.4s ease}
-.success-overlay .big-heart{font-size:5rem;animation:heartbeat 0.8s ease infinite}
+.success-gif{
+  width:min(170px,46vw);
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 18px 28px rgba(0,0,0,0.26));
+  animation:popIn 0.35s ease;
+}
 .success-msg{
   font-family:'Dancing Script',cursive;
   font-size:2.4rem;color:var(--pink);text-align:center;
 }
+.bye-overlay{
+  position:fixed;inset:0;z-index:10001;
+  display:none;align-items:center;justify-content:center;flex-direction:column;
+  background:var(--bg);
+  gap:18px;
+  text-align:center;
+  padding:24px;
+}
+.bye-overlay.show{display:flex;animation:fadeIn 0.35s ease}
+.bye-heart{
+  font-size:4.5rem;
+  color:var(--pink);
+  animation:heartbeat 1s ease-in-out infinite;
+  filter:drop-shadow(0 0 24px rgba(196,169,220,0.35));
+}
+.bye-gifs{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.bye-gif{
+  width:min(160px,38vw);
+  aspect-ratio:1;
+  object-fit:contain;
+  border-radius:0;
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+.bye-msg{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(2rem,7vw,3rem);
+  color:var(--pink);
+}
+.bye-sub{
+  color:var(--text-muted);
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;
+  font-style:italic;
+}
+.bye-loading{
+  width:min(240px,70vw);
+  height:4px;
+  margin-top:10px;
+  background:var(--surface);
+  border-radius:999px;
+  overflow:hidden;
+}
+.bye-loading-fill{
+  height:100%;
+  width:0;
+  background:var(--rose);
+  border-radius:999px;
+}
+.bye-overlay.show .bye-loading-fill{
+  animation:byeLoad 3.4s ease forwards;
+}
+@keyframes byeLoad{from{width:0}to{width:100%}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
 /* ===========================
@@ -408,6 +508,13 @@ nav.scrolled{
   transition:color var(--transition);
   position:relative;
 }
+nav:not(.scrolled) .nav-links a{
+  color:rgba(233,246,255,0.82);
+  text-shadow:0 1px 8px rgba(0,0,0,0.65);
+}
+nav:not(.scrolled) .nav-links a:hover{
+  color:#ffffff;
+}
 .nav-links a::after{
   content:'';position:absolute;bottom:-4px;left:0;right:0;
   height:1px;background:var(--rose);
@@ -424,6 +531,22 @@ nav.scrolled{
   transition:background var(--transition),transform var(--transition);
 }
 .icon-btn:hover{background:var(--surface2);transform:scale(1.1)}
+#theme-toggle{
+  background:rgba(233,246,255,0.92);
+  border-color:rgba(233,246,255,0.75);
+  color:#0C0E1A;
+  box-shadow:0 8px 24px rgba(0,0,0,0.24);
+}
+#theme-toggle:hover{
+  background:#ffffff;
+  transform:scale(1.1);
+}
+#back-landing-btn{
+  display:none;
+}
+body.unlocked #back-landing-btn{
+  display:flex;
+}
 .hamburger{display:none;flex-direction:column;gap:5px;padding:8px}
 .hamburger span{
   width:22px;height:2px;
@@ -467,7 +590,7 @@ nav.scrolled{
   left: 0;
   right: 0;
   height: 180px;
-  background: linear-gradient(to bottom, transparent, var(--bg2));
+  background: linear-gradient(to bottom, transparent, rgba(229, 215, 243, 0.82));
   pointer-events: none;
   z-index: 1;
 }
@@ -527,12 +650,28 @@ nav.scrolled{
   z-index: 1;
 }
 .hero-bg{
-  position:absolute;inset:0;
-  background:var(--bg);
+  position:absolute;inset:-12vh 0;
+  background:
+    radial-gradient(ellipse at center, rgba(12, 14, 26, 0.55) 0%, rgba(12, 14, 26, 0.34) 42%, rgba(12, 14, 26, 0.08) 72%),
+    linear-gradient(rgba(233, 246, 255, 0.44), rgba(229, 215, 243, 0.62)),
+    url("images/landing.jpg") center center / cover no-repeat;
+  will-change:transform;
+}
+body.unlocked .hero-bg{
+  background:
+    radial-gradient(ellipse at center, rgba(12, 14, 26, 0.58) 0%, rgba(12, 14, 26, 0.36) 42%, rgba(12, 14, 26, 0.1) 72%),
+    linear-gradient(rgba(233, 246, 255, 0.42), rgba(229, 215, 243, 0.58)),
+    url("images/home.jpg") center center / cover no-repeat;
 }
 .hero-content{
   position:relative;z-index: 2;
-  max-width:700px;
+  max-width:min(1100px, 94vw);
+}
+body.scroll-locked:not(.unlocked) #hero .hero-content{
+  transform:translateY(76px);
+}
+body.unlocked #hero .hero-content{
+  transform:none;
 }
 .hero-badge{
   display:inline-block;
@@ -546,41 +685,70 @@ nav.scrolled{
 }
 .hero-title{
   font-family:'Dancing Script',cursive;
-  font-size:clamp(3.2rem,8vw,6.2rem);
+  font-size:clamp(2.5rem,6vw,5.6rem);
   font-weight:700;line-height:1.2;
   margin-bottom:20px;
-  color:var(--pink);
+  color:#E5D7F3;
+  -webkit-text-stroke:0.6px rgba(12,14,26,0.45);
+  text-shadow:
+    0 2px 2px rgba(12,14,26,0.95),
+    0 6px 18px rgba(12,14,26,0.9),
+    0 0 30px rgba(196,169,220,0.72);
   animation:fadeUp 1s ease 0.3s both;
+  white-space:nowrap;
 }
 .hero-sub{
-  font-size:1.05rem;color:var(--text-muted);
+  font-size:1.05rem;color:rgba(233,246,255,0.92);
   font-style:italic;font-family:'Cormorant Garamond',serif;
   margin-bottom:40px;line-height:1.7;
+  text-shadow:0 2px 12px rgba(0,0,0,0.75);
   animation:fadeUp 1s ease 0.5s both;
 }
 @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 .enter-btn{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:18px 40px;
-  background:var(--rose);
-  border-radius:50px;
-  color:#0C0E1A;font-size:1rem;font-weight:600;
-  letter-spacing:0.05em;
-  box-shadow:0 10px 40px rgba(155,179,223,0.35);
+  display:inline-flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  width:auto;
+  min-width:120px;
+  height:auto;
+  padding:0;
+  background:transparent;
+  color:var(--pink);
+  box-shadow:none;
   transition:all var(--transition);
-  animation:fadeUp 1s ease 0.7s both, pulse 2s ease 2s infinite;
-  position:relative;overflow:hidden;
+  animation:fadeUp 1s ease 0.7s both, heartLockFloat 2.4s ease-in-out 2s infinite;
+  position:relative;
+  overflow:visible;
+  text-align:center;
 }
 .enter-btn::before{
-  content:'';
-  position:absolute;inset:0;
-  background:rgba(255,255,255,0.15);
-  transform:translateX(-100%);
-  transition:transform 0.6s;
+  display:none;
 }
-.enter-btn:hover::before{transform:translateX(100%)}
-.enter-btn:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(155,179,223,0.5)}
+.tap-gif{
+  width:120px;
+  max-width:32vw;
+  height:auto;
+  object-fit:contain;
+  filter:drop-shadow(0 14px 18px rgba(0,0,0,0.25));
+}
+.tap-label{
+  font-family:'Dancing Script',cursive;
+  font-size:1.35rem;
+  color:#F4EAFE;
+  text-shadow:
+    0 2px 2px rgba(12,14,26,0.9),
+    0 4px 14px rgba(12,14,26,0.85);
+  line-height:1;
+}
+.enter-btn:hover{transform:translateY(-5px) scale(1.04)}
 .enter-btn:active{transform:scale(0.97)}
+@keyframes heartLockFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
 @keyframes pulse{
   0%,100%{box-shadow:0 10px 40px rgba(155,179,223,0.3)}
   50%{box-shadow:0 10px 60px rgba(155,179,223,0.55)}
@@ -732,7 +900,7 @@ nav.scrolled{
 }
 .gallery-slide {
   width: 320px;
-  aspect-ratio: 4/5;
+  aspect-ratio: 4/5.35;
   flex-shrink: 0;
   position: relative;
   perspective: 1000px;
@@ -762,13 +930,16 @@ nav.scrolled{
 .gallery-item {
   width: 100%;
   height: 100%;
-  border-radius: 24px;
+  border-radius: 6px;
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  background:#fffdf8;
+  border:1px solid rgba(15,23,42,0.08);
+  padding:12px 12px 62px;
+  box-shadow:
+    0 16px 34px rgba(0,0,0,0.24),
+    inset 0 0 0 1px rgba(255,255,255,0.7);
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1),
               filter 0.6s cubic-bezier(0.25, 1, 0.5, 1),
               opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
@@ -776,11 +947,12 @@ nav.scrolled{
               box-shadow 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   transform-style: preserve-3d;
 }
+.gallery-item::after{display:none}
 /* Side Card state (Inactive) */
 .gallery-slide:not(.active) .gallery-item {
-  transform: scale(0.85) rotateY(-5deg);
-  filter: blur(2.5px);
-  opacity: 0.5;
+  transform: scale(0.85) rotate(-3deg);
+  filter: blur(1.6px) saturate(0.82);
+  opacity: 0.62;
 }
 /* Slide interactive overlay for selecting side cards */
 .gallery-slide-overlay {
@@ -794,21 +966,25 @@ nav.scrolled{
 }
 /* Active Card state */
 .gallery-slide.active .gallery-item {
-  transform: scale(1.10) translateZ(15px);
+  transform: scale(1.08) translateZ(15px) rotate(1.5deg);
   filter: blur(0);
   opacity: 1;
   z-index: 5;
-  border-color: var(--pink);
-  box-shadow: var(--glow-strong);
+  border-color:rgba(15,23,42,0.12);
+  box-shadow:
+    0 24px 54px rgba(0,0,0,0.32),
+    0 0 0 1px rgba(255,255,255,0.82) inset;
 }
 .gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius:3px;
+  border:1px solid rgba(15,23,42,0.08);
   transition: transform 0.8s ease;
 }
 .gallery-slide.active .gallery-item:hover img {
-  transform: scale(1.08);
+  transform: scale(1.035);
 }
 .gallery-overlay {
   position: absolute;
@@ -950,11 +1126,24 @@ nav.scrolled{
   padding:20px;
 }
 #lightbox.open{display:flex}
-#lightbox-img{
-  max-width:90vw;max-height:80vh;
-  border-radius:16px;
-  box-shadow:0 0 60px rgba(196, 169, 220, 0.25);
+.lightbox-polaroid{
+  background:#fffdf8;
+  padding:14px 14px 58px;
+  border-radius:7px;
+  border:1px solid rgba(15,23,42,0.1);
+  box-shadow:
+    0 28px 70px rgba(0,0,0,0.48),
+    inset 0 0 0 1px rgba(255,255,255,0.72);
+  transform:rotate(-1.2deg);
   animation:popIn 0.3s ease;
+}
+#lightbox-img{
+  display:block;
+  max-width:min(86vw, 900px);
+  max-height:72vh;
+  border-radius:3px;
+  border:1px solid rgba(15,23,42,0.08);
+  object-fit:contain;
 }
 .lb-caption{
   position:absolute;bottom:40px;left:50%;transform:translateX(-50%);
@@ -1580,8 +1769,15 @@ footer .footer-brand{
    LIGHT THEME OVERRIDES
 =========================== */
 [data-theme="light"] .countdown-num{color:var(--deep-rose)}
-[data-theme="light"] .hero-badge{background:rgba(196, 169, 220, 0.15)}
-[data-theme="light"] .gallery-item{background:rgba(155, 179, 223, 0.12)}
+[data-theme="light"] #theme-toggle{
+  background:rgba(15,23,42,0.84);
+  border-color:rgba(255,255,255,0.42);
+  color:#ffffff;
+}
+[data-theme="light"] #theme-toggle:hover{
+  background:#0F172A;
+}
+[data-theme="light"] .gallery-item{background:#fffdf8}
 [data-theme="light"] nav.scrolled{color:#0F172A}
 [data-theme="light"] .keypad-btn .heart-bg {
   fill: rgba(15, 23, 42, 0.02);
@@ -1592,12 +1788,96 @@ footer .footer-brand{
   stroke: var(--pink);
 }
 
+/* Photo hero theme colors */
+[data-theme="dark"] .hero-bg{
+  background:
+    radial-gradient(ellipse at center, rgba(12, 14, 26, 0.7) 0%, rgba(12, 14, 26, 0.46) 44%, rgba(12, 14, 26, 0.16) 74%),
+    linear-gradient(rgba(20, 23, 43, 0.5), rgba(12, 14, 26, 0.74)),
+    url("images/landing.jpg") center center / cover no-repeat;
+}
+[data-theme="light"] .hero-bg{
+  background:
+    radial-gradient(ellipse at center, rgba(233, 246, 255, 0.48) 0%, rgba(233, 246, 255, 0.32) 42%, rgba(233, 246, 255, 0.1) 72%),
+    linear-gradient(rgba(233, 246, 255, 0.64), rgba(229, 215, 243, 0.78)),
+    url("images/landing.jpg") center center / cover no-repeat;
+}
+[data-theme="dark"] body.unlocked .hero-bg{
+  background:
+    radial-gradient(ellipse at center, rgba(12, 14, 26, 0.74) 0%, rgba(12, 14, 26, 0.48) 44%, rgba(12, 14, 26, 0.18) 74%),
+    linear-gradient(rgba(20, 23, 43, 0.52), rgba(12, 14, 26, 0.76)),
+    url("images/home.jpg") center center / cover no-repeat;
+}
+[data-theme="light"] body.unlocked .hero-bg{
+  background:
+    radial-gradient(ellipse at center, rgba(233, 246, 255, 0.5) 0%, rgba(233, 246, 255, 0.34) 42%, rgba(233, 246, 255, 0.12) 72%),
+    linear-gradient(rgba(233, 246, 255, 0.62), rgba(229, 215, 243, 0.76)),
+    url("images/home.jpg") center center / cover no-repeat;
+}
+[data-theme="dark"] #hero::after{
+  background:linear-gradient(to bottom, transparent, rgba(12, 14, 26, 0.92));
+}
+[data-theme="light"] #hero::after{
+  background:linear-gradient(to bottom, transparent, rgba(229, 215, 243, 0.82));
+}
+[data-theme="dark"] #hero .hero-title{
+  color:#E5D7F3;
+  -webkit-text-stroke:0.6px rgba(12,14,26,0.5);
+  text-shadow:
+    0 2px 2px rgba(12,14,26,0.96),
+    0 6px 18px rgba(12,14,26,0.92),
+    0 0 30px rgba(196,169,220,0.72);
+}
+[data-theme="light"] #hero .hero-title{
+  color:#3B2356;
+  -webkit-text-stroke:0.35px rgba(255,255,255,0.68);
+  text-shadow:
+    0 1px 1px rgba(255,255,255,0.92),
+    0 3px 10px rgba(12,14,26,0.42),
+    0 0 22px rgba(255,255,255,0.85);
+}
+[data-theme="dark"] #hero .tap-label{
+  color:#F4EAFE;
+  text-shadow:
+    0 2px 2px rgba(12,14,26,0.9),
+    0 4px 14px rgba(12,14,26,0.85);
+}
+[data-theme="light"] #hero .tap-label{
+  color:#2F1B46;
+  text-shadow:
+    0 1px 1px rgba(255,255,255,0.95),
+    0 3px 9px rgba(12,14,26,0.4);
+}
+[data-theme="dark"] nav:not(.scrolled) .nav-logo{
+  color:#E5D7F3;
+  text-shadow:0 2px 2px rgba(12,14,26,0.9), 0 4px 16px rgba(12,14,26,0.85);
+}
+[data-theme="light"] nav:not(.scrolled) .nav-logo{
+  color:#3B2356;
+  text-shadow:0 1px 1px rgba(255,255,255,0.95), 0 3px 10px rgba(12,14,26,0.36);
+}
+[data-theme="dark"] nav:not(.scrolled) .nav-links a{
+  color:rgba(244,234,254,0.92);
+  text-shadow:0 1px 2px rgba(12,14,26,0.95), 0 3px 10px rgba(12,14,26,0.8);
+}
+[data-theme="light"] nav:not(.scrolled) .nav-links a{
+  color:rgba(24,42,75,0.96);
+  text-shadow:0 1px 1px rgba(255,255,255,0.96), 0 3px 9px rgba(12,14,26,0.34);
+}
+[data-theme="dark"] nav:not(.scrolled) .nav-links a:hover{
+  color:#ffffff;
+}
+[data-theme="light"] nav:not(.scrolled) .nav-links a:hover{
+  color:#4F356B;
+}
+
 /* Responsive tweaks */
 @media(max-width:480px){
   .pw-card{padding:36px 24px}
   .reasons-grid{grid-template-columns:1fr}
   .letters-grid{grid-template-columns:1fr 1fr}
   .countdown-num{font-size:2.4rem}
+  .hero-title{font-size:clamp(1.9rem,10vw,2.6rem)}
+  .tap-gif{width:96px;max-width:42vw}
 }
 body.scroll-locked {
   overflow: hidden !important;
@@ -1626,9 +1906,11 @@ body.unlocked #enter-btn {
 
 <!-- ===== LOADING SCREEN ===== -->
 <div id="loading-screen">
-  <span class="loading-heart text-danger"><i class="bi bi-heart-fill"></i></span>
+  <div class="loading-heart-meter" aria-label="Loading">
+    <i class="bi bi-heart-fill heart-outline"></i>
+    <div class="heart-fill"><i class="bi bi-heart-fill"></i></div>
+  </div>
   <div class="loading-text">Preparing something special…</div>
-  <div class="loading-bar"><div class="loading-fill"></div></div>
 </div>
 
 <!-- ===== PASSWORD SCREEN ===== -->
@@ -1711,14 +1993,25 @@ body.unlocked #enter-btn {
     </div>
     
     <div class="pw-message" id="pw-message"></div>
+    <img class="pw-angry-gif" id="pw-angry-gif" src="images/angry.gif" alt="Angry reaction">
   </div>
 </div>
 
 <!-- ===== SUCCESS OVERLAY ===== -->
 <div class="success-overlay" id="success-overlay">
-  <div class="big-heart text-danger"><i class="bi bi-heart-fill"></i></div>
-  <div class="success-msg">Welcome my love <i class="bi bi-heart-fill text-danger ms-1"></i></div>
+  <img class="success-gif" src="images/correct.gif" alt="Correct passcode">
+  <div class="success-msg">Yay! Welcome my luv <i class="bi bi-heart-fill text-danger ms-1"></i></div>
   <div style="color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem">You knew it all along…</div>
+</div>
+
+<!-- ===== BYE / RETURN OVERLAY ===== -->
+<div class="bye-overlay" id="bye-overlay">
+  <div class="bye-gifs">
+    <img class="bye-gif" src="images/bye.webp" alt="Cute bye animation">
+  </div>
+  <div class="bye-msg">Bye muna, biluv</div>
+  <div class="bye-sub">Balik tayo sa start... see you again in a bit.</div>
+  <div class="bye-loading"><div class="bye-loading-fill"></div></div>
 </div>
 
 <!-- ===== SCROLL PROGRESS ===== -->
@@ -1736,12 +2029,13 @@ body.unlocked #enter-btn {
     <li><a href="#hero">Home</a></li>
     <li><a href="#countdown">Countdown</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#reasons">biluv</a></li>
+    <li><a href="#reasons">Love</a></li>
     <li><a href="#letters">Letters</a></li>
     <li><a href="#timeline">Timeline</a></li>
     <li><a href="#final">Surprise</a></li>
   </ul>
   <div class="nav-controls">
+    <button class="icon-btn" id="back-landing-btn" title="Back to landing"><i class="bi bi-house-heart-fill"></i></button>
     <button class="icon-btn" id="theme-toggle" title="Toggle theme"><i class="bi bi-moon-stars-fill"></i></button>
     <button class="icon-btn hamburger" id="hamburger" title="Menu">
       <span></span><span></span><span></span>
@@ -1754,7 +2048,7 @@ body.unlocked #enter-btn {
   <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
   <li><a href="#countdown" onclick="closeMobileMenu()">Countdown</a></li>
   <li><a href="#gallery" onclick="closeMobileMenu()">Gallery</a></li>
-  <li><a href="#reasons" onclick="closeMobileMenu()">biluv</a></li>
+  <li><a href="#reasons" onclick="closeMobileMenu()">Love</a></li>
   <li><a href="#letters" onclick="closeMobileMenu()">Letters</a></li>
   <li><a href="#timeline" onclick="closeMobileMenu()">Timeline</a></li>
   <li><a href="#final" onclick="closeMobileMenu()">Surprise</a></li>
@@ -1764,11 +2058,10 @@ body.unlocked #enter-btn {
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-badge"><i class="bi bi-stars text-warning me-1"></i> A Love Story <i class="bi bi-stars text-warning ms-1"></i></div>
-    <h1 class="hero-title">Happy 3yrs. & 1mos Biluv <i class="bi bi-heart-fill text-danger ms-1"></i></h1>
-    <p class="hero-sub">Every moment with you is a universe I never want to leave.<br>Here's to us — beautiful, infinite, ours.</p>
+    <h1 class="hero-title">Happy 3yrs. &amp; 1mos Biluv</h1>
     <button class="enter-btn" id="enter-btn">
-      <i class="bi bi-envelope-heart-fill me-2 fs-5"></i> Enter Our Story
+      <img class="tap-gif" src="images/tap.gif" alt="" aria-hidden="true">
+      <span class="tap-label">tap me please</span>
     </button>
   </div>
   <div class="scroll-hint">
@@ -1834,7 +2127,9 @@ body.unlocked #enter-btn {
 <div id="lightbox">
   <button class="lb-close" id="lb-close"><i class="bi bi-x-lg"></i></button>
   <button class="lb-prev" id="lb-prev"><i class="bi bi-chevron-left"></i></button>
-  <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-polaroid">
+    <img id="lightbox-img" src="" alt="">
+  </div>
   <button class="lb-next" id="lb-next"><i class="bi bi-chevron-right"></i></button>
   <div class="lb-caption" id="lb-caption"></div>
 </div>
@@ -1843,9 +2138,9 @@ body.unlocked #enter-btn {
 <section id="reasons">
   <div class="section-inner">
     <div class="section-tag">From My Heart</div>
-    <h2 class="section-title reveal">Why I biluv You</h2>
+    <h2 class="section-title reveal">Bakit Love Na Love Kita</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Let me count the ways — though forever wouldn't be enough.</p>
+    <p class="section-desc reveal">Hindi ko man ma-list lahat, eto yung ilan sa mga dahilan kung bakit ikaw pa rin.</p>
     <div class="reasons-grid reveal" id="reasons-grid">
       <!-- Generated by JS -->
     </div>
@@ -1856,9 +2151,9 @@ body.unlocked #enter-btn {
 <section id="letters">
   <div class="section-inner">
     <div class="section-tag">Open When…</div>
-    <h2 class="section-title reveal">Letters from the Heart</h2>
+    <h2 class="section-title reveal">Letters Galing sa Heart</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">For every moment you need a little more of me.</p>
+    <p class="section-desc reveal">Para sa mga moments na kailangan mo ng konting lambing from me.</p>
     <div class="letters-grid reveal" id="letters-grid">
       <!-- Generated by JS -->
     </div>
@@ -1888,9 +2183,9 @@ body.unlocked #enter-btn {
 <section id="timeline">
   <div class="section-inner">
     <div class="section-tag">Our Journey</div>
-    <h2 class="section-title reveal">Where We've Been</h2>
+    <h2 class="section-title reveal">Kung Saan Tayo Nagsimula</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Every chapter of us, beautifully written.</p>
+    <p class="section-desc reveal">Mga memories natin, from simple chats hanggang sa lahat ng meron tayo ngayon.</p>
     <div class="timeline-wrap reveal" id="timeline-wrap">
       <div class="timeline-line"></div>
       <!-- Generated by JS -->
@@ -1901,13 +2196,12 @@ body.unlocked #enter-btn {
 <!-- ===== FINAL ===== -->
 <section id="final">
   <div class="final-inner">
-    <div class="final-hearts reveal"><i class="bi bi-heart-fill text-danger mx-1"></i><i class="bi bi-stars text-warning mx-1"></i><i class="bi bi-heart-fill text-danger mx-1"></i></div>
-    <h2 class="final-title reveal">One Last Thing…</h2>
+    <h2 class="final-title reveal">Last Na, Promise…</h2>
     <div id="typing-text" class="reveal"><span class="typing-cursor"></span></div>
-    <div class="final-quote reveal">"You are my favourite notification, my favourite distraction, my favourite everything."</div>
+    <div class="final-quote reveal">"Ikaw yung favorite notification ko, favorite distraction ko, favorite everything ko."</div>
     <br>
     <button class="confetti-btn reveal" id="confetti-btn">
-      <i class="bi bi-balloon-fill text-warning me-2"></i> Celebrate Us!
+      <i class="bi bi-balloon-fill text-warning me-2"></i> Click Me For Surprise!
     </button>
   </div>
 </section>
@@ -1915,7 +2209,7 @@ body.unlocked #enter-btn {
 <!-- ===== FOOTER ===== -->
 <footer>
   <div class="footer-brand">Our Story <i class="bi bi-heart-fill text-danger ms-1"></i></div>
-  <p>Made with <span class="footer-heart"><i class="bi bi-heart-fill text-danger"></i></span> just for you &nbsp;·&nbsp; Every word, true</p>
+  <p>Ginawa with <span class="footer-heart"><i class="bi bi-heart-fill text-danger"></i></span> para lang sayo &nbsp;·&nbsp; Every word, totoo</p>
 </footer>
 
 <!-- ===== MUSIC PLAYER ===== -->
@@ -2070,19 +2364,37 @@ enterBtn.addEventListener('click', () => {
   startPasscodeHearts();
 });
 
+const backLandingBtn = document.getElementById('back-landing-btn');
+const byeOverlay = document.getElementById('bye-overlay');
+backLandingBtn.addEventListener('click', () => {
+  byeOverlay.classList.add('show');
+  closeMobileMenu();
+  if (typeof pauseAudio === 'function') pauseAudio();
+  setTimeout(() => {
+    document.body.classList.remove('unlocked');
+    document.body.classList.add('scroll-locked');
+    pwScreen.classList.remove('active');
+    closePasswordScreen();
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    setTimeout(() => {
+      byeOverlay.classList.remove('show');
+    }, 450);
+  }, 3600);
+});
+
 /* ============================
    PASSWORD LOGIC (iPhone Passcode Style)
    ============================ */
 const CORRECT_PW = '051623';
 const wrongMessages = [
-  "Wrong password 😤💢 try again love!",
+  "Wrong password 😤💢 try again luv!",
   "Hmmmm that's not it 😠💕",
   "Access denied cutie 🚫🥺",
-  "Are you even my baby? 😾❤️",
+  "Are you even my luv? 😾❤️",
   "Nope nope nope 😤🌸",
   "That password made the hearts angry 💔😡",
   "Almost… but not quite 🥲💔",
-  "Keep trying, babe 😤✨"
+  "Keep trying, luv 😤✨"
 ];
 let enteredPasscode = '';
 
@@ -2116,6 +2428,7 @@ function closePasswordScreen() {
   updatePasscodeDots();
   stopPasscodeHearts();
   document.getElementById('pw-message').textContent = '';
+  document.getElementById('pw-angry-gif').classList.remove('show');
 }
 document.getElementById('pw-close').addEventListener('click', closePasswordScreen);
 
@@ -2142,6 +2455,7 @@ function spawnBrokenHeart(container) {
 
 function handleKeyInput(num) {
   if (enteredPasscode.length < 6) {
+    document.getElementById('pw-angry-gif').classList.remove('show');
     enteredPasscode += num;
     updatePasscodeDots();
     if (enteredPasscode.length === 6) {
@@ -2162,7 +2476,8 @@ function checkPasscode() {
   const dotsWrap = document.querySelector('.passcode-dots');
   if (enteredPasscode === CORRECT_PW) {
     msg.className = 'pw-message success';
-    msg.textContent = '✓ Correct! Welcome, my love…';
+    msg.textContent = '✓ Correct! Yay! Welcome, my luv…';
+    document.getElementById('pw-angry-gif').classList.remove('show');
     document.body.classList.remove('scroll-locked');
     document.body.classList.add('unlocked');
     stopPasscodeHearts();
@@ -2188,6 +2503,10 @@ function checkPasscode() {
     dotsWrap.classList.add('shake');
     msg.className = 'pw-message error';
     msg.textContent = wrongMessages[Math.floor(Math.random() * wrongMessages.length)];
+    const angryGif = document.getElementById('pw-angry-gif');
+    angryGif.classList.remove('show');
+    void angryGif.offsetWidth;
+    angryGif.classList.add('show');
     spawnBrokenHeart(document.getElementById('pw-hearts-container'));
     if('vibrate' in navigator) navigator.vibrate([100,50,100]);
     // Clear code after brief delay to re-try
@@ -2236,18 +2555,18 @@ setInterval(updateCountdown, 1000);
    GALLERY
 ============================ */
 const galleryData = [
-  {emoji:'📸', caption:'Our first selfie together', img:'1.JPG'},
-  {emoji:'🌅', caption:'Watching sunsets with you', img:'2.JPG'},
-  {emoji:'🍜', caption:'Late night food adventures', img:'3.JPG'},
-  {emoji:'🎮', caption:'Game nights that never end', img:'4.JPG'},
-  {emoji:'☕', caption:'Coffee dates every morning', img:'5.JPG'},
-  {emoji:'🌸', caption:'Spring walks in the park', img:'6.jpg'},
-  {emoji:'🎵', caption:'Dancing to our song', img:'7.jpg'},
-  {emoji:'🌙', caption:'Stargazing and dreaming', img:'8.JPG'},
-  {emoji:'🍕', caption:'Pizza and movies', img:'9.jpg'},
-  {emoji:'💐', caption:'Surprise flowers for you', img:'10.jpg'},
-  {emoji:'🎠', caption:'Adventures we took', img:'11.jpg'},
-  {emoji:'🤗', caption:'Hugs that last forever', img:'12.jpg'},
+  {emoji:'📸', img:'images/1.JPG'},
+  {emoji:'🌅', img:'images/2.JPG'},
+  {emoji:'🍜', img:'images/3.JPG'},
+  {emoji:'🎮', img:'images/4.JPG'},
+  {emoji:'☕', img:'images/5.JPG'},
+  {emoji:'🌸', img:'images/6.jpg'},
+  {emoji:'🎵', img:'images/7.jpg'},
+  {emoji:'🌙', img:'images/8.JPG'},
+  {emoji:'🍕', img:'images/9.jpg'},
+  {emoji:'💐', img:'images/10.jpg'},
+  {emoji:'🎠', img:'images/11.jpg'},
+  {emoji:'🤗', img:'images/12.jpg'},
 ];
 const carouselContainer = document.getElementById('gallery-carousel-container');
 const carouselTrack = document.getElementById('gallery-carousel-track');
@@ -2525,15 +2844,15 @@ document.getElementById('lightbox').addEventListener('click', e => {
    REASONS WHY I LOVE YOU
 ============================ */
 const reasons = [
-  {icon:'bi-emoji-laughing-fill', title:'Your Laugh', text:'The way you laugh with your whole body is my favorite sound in the entire universe.'},
-  {icon:'bi-shield-heart', title:'Your Strength', text:'You face every storm with such grace. You inspire me to be better every single day.'},
-  {icon:'bi-lightbulb-fill', title:'Your Mind', text:'The way you think, dream, and see the world — it fascinates me endlessly.'},
-  {icon:'bi-heart-fill', title:'Your Kindness', text:'You have a heart so big it could hold the whole world. I\'m lucky it holds me.'},
-  {icon:'bi-stars', title:'Your Smile', text:'One smile from you can fix any bad day I\'ve ever had. It\'s just magic.'},
-  {icon:'bi-chat-dots-fill', title:'Late Night Talks', text:'Even at 3am, talking to you feels like the most natural thing in the world.'},
-  {icon:'bi-fire', title:'Your Passion', text:'When you talk about things you love, your eyes light up and I fall all over again.'},
-  {icon:'bi-house-heart-fill', title:'Your Comfort', text:'Being with you feels like coming home after a very long journey.'},
-  {icon:'bi-brightness-high-fill', title:'Your Warmth', text:'Just holding your hand or being near you makes all my worries disappear into thin air.'},
+  {icon:'bi-emoji-laughing-fill', title:'Tawa Mo', text:'Yung tawa mo, kahit simpleng moment lang, nagiging favorite part ko agad ng araw.'},
+  {icon:'bi bi-shield-shaded', title:'Lakas Mo', text:'Kahit may hard days, you still keep going. Nakaka-proud ka, sobra.'},
+  {icon:'bi-lightbulb-fill', title:'Mind Mo', text:'Ang ganda ng way mo mag-isip, mangarap, at tumingin sa mundo. I love that about you.'},
+  {icon:'bi-heart-fill', title:'Kabaitan Mo', text:'Ang soft ng heart mo, and I feel so lucky na may space ako sa loob nun.'},
+  {icon:'bi-stars', title:'Smile Mo', text:'Isang smile mo lang, okay na agad mood ko. Parang instant reset button.'},
+  {icon:'bi-chat-dots-fill', title:'Late Night Talks', text:'Kahit antok na, talking to you still feels easy, warm, and worth it.'},
+  {icon:'bi-fire', title:'Passion Mo', text:'Kapag kinukwento mo yung mga gusto mo, kita ko yung spark sa eyes mo. Ang cute, sobra.'},
+  {icon:'bi-house-heart-fill', title:'Comfort Mo', text:'With you, everything feels calmer. Parang pahinga ka sa magulong mundo.'},
+  {icon:'bi-brightness-high-fill', title:'Warmth Mo', text:'Yung presence mo pa lang, gumagaan na pakiramdam ko. Ikaw yung safe place ko.'},
 ];
 const reasonsGrid = document.getElementById('reasons-grid');
 reasons.forEach((r, i) => {
@@ -2548,19 +2867,24 @@ reasons.forEach((r, i) => {
   reasonsGrid.appendChild(card);
   observer.observe(card);
 });
+const moreReasonsNote = document.createElement('p');
+moreReasonsNote.className = 'start-date-note reveal';
+moreReasonsNote.textContent = 'AND MOREEEEEEEEEEE💗';
+reasonsGrid.insertAdjacentElement('afterend', moreReasonsNote);
+observer.observe(moreReasonsNote);
 
 /* ============================
    OPEN WHEN LETTERS
 ============================ */
 const letters = [
-  {icon:'bi-telephone-fill', when:'Open when you miss me', title:'When You Miss Me', text:'Close your eyes. Feel that warmth? That\'s me, always here. I carry you with me everywhere I go — in my laugh, in my quiet moments, in everything beautiful I notice. Distance is just a number when two hearts are woven together like ours are. I miss you too, always. But I\'ll see you again soon. Until then, know you\'re my favourite thought. 💕'},
-  {icon:'bi-cloud-rain-fill', when:'Open when you\'re sad', title:'For Your Sad Days', text:'Baby, let yourself feel it. You don\'t have to be strong right now. Cry if you need to. But please know — your sadness does not define you. You are made of softer, stronger things than whatever broke you today. I wish I could hold you through it. Pretend I am. You are so deeply loved, and this cloud will pass. I promise. ☁️➡️🌈'},
-  {icon:'bi-lightning-charge-fill', when:'Open when you need motivation', title:'Your Hype Letter', text:'Hey. Listen to me. You are THAT person. The one who somehow handles everything while making it look easy. You\'ve overcome harder than this. You have a fire in you that nothing can put out. Whatever challenge is in front of you right now? It doesn\'t stand a chance. Go get it. I\'m cheering so loud for you. 🔥'},
-  {icon:'bi-heartbreak-fill', when:'Open when you\'re mad at me', title:'For Our Disagreements', text:'I know you\'re upset with me, and your feelings are completely valid. I never want to hurt you. Let\'s not let any argument be bigger than us. I love you too much to let pride win. Can we talk? I\'m always here, always on your side — even when we don\'t agree. You matter more than being right. Always. 🤍'},
-  {icon:'bi-star-fill', when:'Open when you need a reminder', title:'A Reminder of You', text:'You are remarkable. Not because of what you do, but because of who you are. The way you care, the way you love, the way you light up every room — that\'s rare. Don\'t ever let anyone make you feel ordinary. You are extraordinary. I see it every single day and I am the luckiest. ✨'},
-  {icon:'bi-cake2-fill', when:'Open when it\'s a special day', title:'For Your Special Days', text:'Whatever milestone this is — big or small — it deserves to be celebrated. And so do you. You work so hard, you love so deeply. Take today and own it fully. Eat the cake. Dance in the kitchen. Today is yours and you are my favourite person to celebrate. Happy whatever-day-it-is! 🎂🎊'},
-  {icon:'bi-moon-stars-fill', when:'Open when you can\'t sleep', title:'For Sleepless Nights', text:'Hey there, sleepyhead... If your mind is racing and sleep feels far away, take a deep breath. Imagine me wrapping my arms around you, pulling you close, and whispering that everything is going to be okay. You are safe, you are loved, and tomorrow is a fresh start. Close your eyes and let my love guide you into beautiful dreams. 🌙'},
-  {icon:'bi-cup-hot-fill', when:'Open when you\'re hungry or indecisive', title:'For Food Dilemmas', text:'Are we hungry? Or are we just bored? Either way, you deserve your favorite treat right now. Go order that pizza, get that sweet matcha latte, or grab some comfort food. Don\'t stress about anything else today—just enjoy every single bite. Treat yourself, my love! 🍕🍰'}
+  {icon:'bi-telephone-fill', when:'Open when you miss me', title:'Kapag Namimiss Mo Ako', text:'Close your eyes muna. Imagine mo nandiyan lang ako, kausap ka, kinukulit ka, at pinaparamdam na hindi ka nag-iisa. Namimiss din kita, palagi. Konting tiis lang, magkikita rin tayo ulit. For now, remember na ikaw lagi nasa isip ko. 💕'},
+  {icon:'bi-cloud-rain-fill', when:'Open when you\'re sad', title:'Kapag Sad Ka', text:'Luv, okay lang mapagod. Okay lang umiyak. Hindi mo kailangan maging strong every time. I wish I could hug you right now, pero habang wala ako diyan, please remember na mahal na mahal kita. Lilipas din yan, and I\'m always here for you. ☁️➡️🌈'},
+  {icon:'bi-lightning-charge-fill', when:'Open when you need motivation', title:'Kaya Mo Yan', text:'Luv, listen. Kaya mo yan. You\'ve handled so many things already, and I know you can handle this too. Step by step lang. I\'m proud of you kahit hindi mo pa tapos lahat. Go, Luv. I\'m cheering for you. 🔥'},
+  {icon:'bi-heartbreak-fill', when:'Open when you\'re mad at me', title:'Kapag Galit Ka Sa Akin', text:'I know may times na nagkakamali ako, and I never want you to feel unheard. Your feelings matter to me. Usap tayo kapag ready ka na, okay? Mas mahalaga ka sa akin kaysa sa pride ko. I love you, kahit may tampuhan. 🤍'},
+  {icon:'bi-star-fill', when:'Open when you need a reminder', title:'Reminder Lang', text:'In case nakakalimutan mo, you are so loved. Ang galing mo, ang bait mo, and you make ordinary days feel special. Huwag mong i-down sarili mo, okay? I see you, and I\'m always proud of you. ✨'},
+  {icon:'bi-cake2-fill', when:'Open when it\'s a special day', title:'For Your Special Day', text:'Today is yours, so enjoy mo lang. Celebrate kahit simple lang, kasi deserve mo yan. Eat something you like, smile a lot, and let yourself feel loved. I\'m so happy I get to celebrate you. 🎂🎊'},
+  {icon:'bi-moon-stars-fill', when:'Open when you can\'t sleep', title:'Kapag Hindi Ka Makatulog', text:'Hey sleepyhead, breathe lang. Hayaan mo muna yung thoughts mo mag-slow down. Imagine mo hawak ko kamay mo and sinasabi ko na okay ka, safe ka, and tomorrow is another chance. Good night, luv. 🌙'},
+  {icon:'bi-cup-hot-fill', when:'Open when you\'re hungry or indecisive', title:'Kapag Gutom Ka', text:'Kung gutom ka, kumain ka na please. Kung hindi ka makapili, pick the one na nagpapasaya sayo today. Potato Corner? Shawarma? Comfort food? Go lang, deserve mo yan. Enjoy every bite, my luv. 🍕🍰'}
 ];
 const lettersGrid = document.getElementById('letters-grid');
 letters.forEach((l, i) => {
@@ -2665,13 +2989,13 @@ document.getElementById('letter-modal').addEventListener('click', e => {
    TIMELINE
 ============================ */
 const timelineEvents = [
-  {icon:'bi-chat-heart-fill', date:'April 08, 2023', event:'The Beginning', note:'The day you send a wave chat on messenger.'},
-  {icon:'bi-calendar-heart-fill', date:'May 16, 2023', event:'The Day We Said Yes', note:'The day you said yes and changed everything. My heart has never been the same.'},
-  {icon:'bi-balloon-heart-fill', date:'May 16, 2024', event:'Our First Anniversary', note:'The beginning of our forever.'},
-  {icon:'bi-stars', date:'May 16, 2025', event:'Our Second Anniversary', note:'Two years of love, laughter, and memories.'},
-  {icon:'bi-infinity', date:'May 16, 2026', event:'Our Third Anniversary', note:'Still choosing each other every single day.'},
-  {icon:'bi-sunrise-fill', date:'June 16, 2026', event:'Our First Monthsary Again', note:'3 years and 1 month of us, and I’d choose you again.'},
-  {icon:'bi-gem', date:'Today', event:'Right Here, Right Now', note:'And every day forward, I choose you. Again and again and always.'},
+  {icon:'bi-chat-heart-fill', date:'April 08, 2023', event:'Doon Nagsimula', note:'Yung araw na nag-send ka ng wave sa Messenger. Simple lang, pero special pala.'},
+  {icon:'bi-calendar-heart-fill', date:'May 16, 2023', event:'The Day We Said Yes', note:'Yung araw na naging tayo. Since then, ikaw na yung favorite person ko.'},
+  {icon:'bi-balloon-heart-fill', date:'May 16, 2024', event:'First Anniversary Natin', note:'One year of us, puno ng memories, lambing, kulit, at love.'},
+  {icon:'bi-stars', date:'May 16, 2025', event:'Second Anniversary Natin', note:'Two years na, and somehow mas lalo pa kitang minahal.'},
+  {icon:'bi-infinity', date:'May 16, 2026', event:'Third Anniversary Natin', note:'Three years of choosing each other, kahit may ups and downs.'},
+  {icon:'bi-sunrise-fill', date:'June 16, 2026', event:'First Monthsary Again', note:'3 years and 1 month na tayo, and yes, ikaw pa rin pipiliin ko.'},
+  {icon:'bi-gem', date:'Today', event:'Right Here, Right Now', note:'And today, same pa rin: mahal kita, pinipili kita, araw-araw.'},
 ];
 const timelineWrap = document.getElementById('timeline-wrap');
 timelineEvents.forEach((ev, i) => {
@@ -2702,7 +3026,7 @@ timelineEvents.forEach((ev, i) => {
 /* ============================
    TYPING EFFECT - FINAL
 ============================ */
-const finalMessage = `My love,\n\nI made this just for you — not because an occasion demanded it, but because you deserve to feel celebrated on any ordinary Tuesday, in any quiet moment, in every breath of every day.\n\nYou walked into my life and rearranged everything. In the best way. In the only way that matters.\n\nI don't know what the future holds, but I know I want it with you — all of it. The adventures, the quiet mornings, the arguments we'll make up from, the laughs we haven't laughed yet.\n\nThank you for choosing me.\n\nForever yours,\nThe one who loves you most. 💕`;
+const finalMessage = `My luv,\n\nGinawa ko 'to para sayo kasi gusto kong may something ka na mababalikan kapag gusto mo ng konting kilig, comfort, or reminder na mahal na mahal kita.\n\nHindi man perfect lahat ng araw natin, pero ikaw pa rin yung gusto kong kausap, kakulitan, kaaway minsan, at kasama sa lahat ng simple moments.\n\nThank you for staying, for choosing me, and for making life feel lighter just by being there.\n\nI don't know everything about the future, pero alam ko na gusto kitang kasama doon. Sa happy days, sa quiet days, pati sa days na kailangan lang natin magpahinga.\n\nHappy monthsary, biluv. Ikaw pa rin. Always.\n\nForever yours,\nThe one who loves you most. 💕`;
 
 let typingStarted = false;
 const typingEl = document.getElementById('typing-text');
