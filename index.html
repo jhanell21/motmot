@@ -5,8 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Happy 3yrs. & 1mos Biluv ❤️</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500;600&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="preload" as="image" href="landing.jpg">
+<link rel="preload" as="image" href="home.jpg">
+<link rel="preload" as="image" href="5.JPG" media="(max-width: 480px)">
+<link rel="preload" as="image" href="3.JPG" media="(max-width: 480px)">
 <style>
 /* ===========================
    CSS VARIABLES & RESET
@@ -1820,7 +1825,7 @@ footer .footer-brand{
   background:linear-gradient(to bottom, transparent, rgba(229, 215, 243, 0.82));
 }
 [data-theme="dark"] #hero .hero-title{
-  color:#E5D7F3;
+  color:#ffffff;
   -webkit-text-stroke:0.6px rgba(12,14,26,0.5);
   text-shadow:
     0 2px 2px rgba(12,14,26,0.96),
@@ -1828,7 +1833,7 @@ footer .footer-brand{
     0 0 30px rgba(196,169,220,0.72);
 }
 [data-theme="light"] #hero .hero-title{
-  color:#3B2356;
+  color:#000000;
   -webkit-text-stroke:0.35px rgba(255,255,255,0.68);
   text-shadow:
     0 1px 1px rgba(255,255,255,0.92),
@@ -1836,31 +1841,31 @@ footer .footer-brand{
     0 0 22px rgba(255,255,255,0.85);
 }
 [data-theme="dark"] #hero .tap-label{
-  color:#F4EAFE;
+  color:#ffffff;
   text-shadow:
     0 2px 2px rgba(12,14,26,0.9),
     0 4px 14px rgba(12,14,26,0.85);
 }
 [data-theme="light"] #hero .tap-label{
-  color:#2F1B46;
+  color:#000000;
   text-shadow:
     0 1px 1px rgba(255,255,255,0.95),
     0 3px 9px rgba(12,14,26,0.4);
 }
 [data-theme="dark"] nav:not(.scrolled) .nav-logo{
-  color:#E5D7F3;
+  color:#ffffff;
   text-shadow:0 2px 2px rgba(12,14,26,0.9), 0 4px 16px rgba(12,14,26,0.85);
 }
 [data-theme="light"] nav:not(.scrolled) .nav-logo{
-  color:#3B2356;
+  color:#000000;
   text-shadow:0 1px 1px rgba(255,255,255,0.95), 0 3px 10px rgba(12,14,26,0.36);
 }
 [data-theme="dark"] nav:not(.scrolled) .nav-links a{
-  color:rgba(244,234,254,0.92);
+  color:#ffffff;
   text-shadow:0 1px 2px rgba(12,14,26,0.95), 0 3px 10px rgba(12,14,26,0.8);
 }
 [data-theme="light"] nav:not(.scrolled) .nav-links a{
-  color:rgba(24,42,75,0.96);
+  color:#000000;
   text-shadow:0 1px 1px rgba(255,255,255,0.96), 0 3px 9px rgba(12,14,26,0.34);
 }
 [data-theme="dark"] nav:not(.scrolled) .nav-links a:hover{
@@ -1872,6 +1877,22 @@ footer .footer-brand{
 
 /* Responsive tweaks */
 @media(max-width:480px){
+  .hero-bg,
+  [data-theme="dark"] .hero-bg,
+  [data-theme="light"] .hero-bg{
+    background:
+      radial-gradient(ellipse at center, rgba(12, 14, 26, 0.64) 0%, rgba(12, 14, 26, 0.4) 42%, rgba(12, 14, 26, 0.12) 72%),
+      linear-gradient(rgba(233, 246, 255, 0.42), rgba(229, 215, 243, 0.62)),
+      url("5.JPG") center center / cover no-repeat;
+  }
+  body.unlocked .hero-bg,
+  [data-theme="dark"] body.unlocked .hero-bg,
+  [data-theme="light"] body.unlocked .hero-bg{
+    background:
+      radial-gradient(ellipse at center, rgba(12, 14, 26, 0.66) 0%, rgba(12, 14, 26, 0.42) 42%, rgba(12, 14, 26, 0.14) 72%),
+      linear-gradient(rgba(233, 246, 255, 0.4), rgba(229, 215, 243, 0.6)),
+      url("3.JPG") center center / cover no-repeat;
+  }
   .pw-card{padding:36px 24px}
   .reasons-grid{grid-template-columns:1fr}
   .letters-grid{grid-template-columns:1fr 1fr}
@@ -1879,9 +1900,267 @@ footer .footer-brand{
   .hero-title{font-size:clamp(1.9rem,10vw,2.6rem)}
   .tap-gif{width:96px;max-width:42vw}
 }
+
+/* ===========================
+   FINAL POLISH & RESPONSIVE SAFETY
+=========================== */
+:focus-visible{
+  outline:2px solid var(--rose);
+  outline-offset:4px;
+}
+button,
+a,
+.letter-card,
+.gallery-item{
+  -webkit-tap-highlight-color:transparent;
+}
+button:disabled{
+  cursor:not-allowed;
+  opacity:0.6;
+}
+html,
+body{
+  max-width:100%;
+}
+body{
+  min-height:100dvh;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+}
+#password-screen,
+#lightbox,
+#letter-modal,
+.success-overlay,
+.bye-overlay{
+  min-height:100dvh;
+  overscroll-behavior:contain;
+}
+nav{
+  min-height:70px;
+}
+.mobile-menu{
+  height:calc(100dvh - 70px);
+  overflow-y:auto;
+  padding:32px 24px;
+}
+.mobile-menu.open{
+  animation:fadeIn 0.25s ease;
+}
+body.menu-open{
+  overflow:hidden;
+}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.open span:nth-child(2){opacity:0}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.hero-bg{
+  background-position:center center;
+  background-size:cover;
+  transform:translate3d(0,0,0);
+  transition:background-image 0.9s ease, filter 0.9s ease;
+}
+.hero-title{
+  max-width:min(100%, 1100px);
+  overflow-wrap:anywhere;
+}
+.section-inner{
+  width:min(100%, 1100px);
+}
+.countdown-wrap{
+  grid-template-columns:repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+}
+.gallery-carousel-container{
+  touch-action:pan-y;
+  overscroll-behavior-x:contain;
+}
+.gallery-item img{
+  background:#fffdf8;
+}
+.carousel-dot{
+  display:block;
+  min-width:8px;
+}
+#lightbox.open,
+#letter-modal.open,
+.success-overlay.show,
+.bye-overlay.show,
+#password-screen.active{
+  animation:fadeIn 0.28s ease;
+}
+.lb-close,
+.lb-prev,
+.lb-next,
+.letter-close,
+.pw-close-btn,
+.carousel-nav-btn,
+.music-ctrl-btn{
+  min-width:44px;
+  min-height:44px;
+}
+.lightbox-polaroid{
+  max-width:calc(100vw - 32px);
+  max-height:calc(100dvh - 120px);
+}
+#lightbox-img{
+  max-width:min(86vw, 900px);
+  max-height:min(72dvh, 780px);
+}
+.lb-caption{
+  width:min(90vw, 720px);
+  text-align:center;
+  bottom:max(24px, env(safe-area-inset-bottom));
+}
+.envelope-container.unfolded .letter-paper{
+  width:min(92vw, 520px) !important;
+  height:min(78dvh, 560px) !important;
+}
+.letter-paper-text{
+  overflow-wrap:break-word;
+}
+#music-player{
+  left:max(20px, env(safe-area-inset-left));
+  bottom:max(20px, env(safe-area-inset-bottom));
+}
+.music-mini{
+  max-width:calc(100vw - 40px);
+}
+@media(max-width:768px){
+  nav{
+    padding:14px 18px;
+  }
+  .nav-logo{
+    font-size:clamp(1.2rem, 5vw, 1.5rem);
+  }
+  .nav-controls{
+    gap:8px;
+  }
+  .icon-btn{
+    width:42px;
+    height:42px;
+  }
+  #hero{
+    min-height:100svh;
+    padding:88px 18px 56px;
+  }
+  .hero-title{
+    white-space:normal;
+    line-height:1.12;
+  }
+  .section-inner{
+    padding:78px 18px;
+  }
+  .section-tag{
+    letter-spacing:0.12em;
+  }
+  .countdown-wrap{
+    gap:14px;
+  }
+  .countdown-block{
+    padding:22px 12px;
+  }
+  .letters-grid{
+    gap:14px;
+  }
+  .letter-card{
+    padding:20px 12px;
+  }
+  .mini-envelope{
+    width:min(138px, 38vw);
+    height:min(96px, 27vw);
+  }
+  .lb-prev,
+  .lb-next{
+    top:auto;
+    bottom:18px;
+    transform:none;
+    background:rgba(255,255,255,0.08);
+    border-radius:50%;
+  }
+  .lb-prev{left:24px}
+  .lb-next{right:24px}
+}
+@media(max-width:480px){
+  .pw-card{
+    width:min(92vw, 340px);
+    max-height:calc(100dvh - 32px);
+    overflow-y:auto;
+    border-radius:24px;
+  }
+  .passcode-keypad{
+    gap:10px 14px;
+    max-width:246px;
+  }
+  .keypad-btn,
+  .keypad-empty{
+    width:68px;
+    height:68px;
+  }
+  .success-msg{
+    font-size:clamp(1.8rem, 10vw, 2.4rem);
+    padding:0 18px;
+  }
+  .mobile-menu{
+    gap:26px;
+  }
+  .mobile-menu a{
+    font-size:clamp(1.8rem, 10vw, 2.2rem);
+  }
+  .gallery-carousel-wrapper{
+    padding:0;
+    margin-top:34px;
+  }
+  .gallery-carousel-container{
+    padding:30px 0;
+  }
+  .gallery-slide:not(.active) .gallery-item{
+    filter:saturate(0.86);
+  }
+  .gallery-slide.active .gallery-item{
+    transform:scale(1.04) translateZ(0) rotate(1deg);
+  }
+  .letters-grid{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+  .letter-title{
+    font-size:clamp(0.98rem, 4.6vw, 1.18rem);
+  }
+  #typing-text{
+    min-height:260px;
+    font-size:1.08rem;
+  }
+  .final-quote{
+    padding:18px 20px;
+  }
+  .music-mini{
+    width:min(240px, calc(100vw - 40px));
+  }
+}
+@media(max-width:360px){
+  .letters-grid{
+    grid-template-columns:1fr;
+  }
+  .mini-envelope{
+    width:150px;
+    height:104px;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:0.001ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:0.001ms !important;
+  }
+  #particles-canvas,
+  #hearts-bg,
+  #confetti-canvas{
+    display:none;
+  }
+}
 body.scroll-locked {
   overflow: hidden !important;
-  height: 100vh;
+  height: 100dvh;
 }
 #progress-bar, #music-player, nav, .scroll-hint {
   opacity: 0 !important;
@@ -1910,12 +2189,12 @@ body.unlocked #enter-btn {
     <i class="bi bi-heart-fill heart-outline"></i>
     <div class="heart-fill"><i class="bi bi-heart-fill"></i></div>
   </div>
-  <div class="loading-text">Preparing something special…</div>
+  <div class="loading-text">Wait lang, may ginawa ako for you...</div>
 </div>
 
 <!-- ===== PASSWORD SCREEN ===== -->
 <div id="password-screen">
-  <button class="pw-close-btn" id="pw-close" title="Close"><i class="bi bi-x-lg"></i></button>
+  <button class="pw-close-btn" id="pw-close" title="Close" aria-label="Close password screen"><i class="bi bi-x-lg"></i></button>
   <div class="pw-card">
     <div class="pw-hearts" id="pw-hearts-container"></div>
     
@@ -1945,72 +2224,72 @@ body.unlocked #enter-btn {
     
     <!-- Circular Keypad -->
     <div class="passcode-keypad">
-      <button class="keypad-btn" onclick="handleKeyInput('1')">
+      <button class="keypad-btn" onclick="handleKeyInput('1')" aria-label="Enter 1">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">1</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('2')">
+      <button class="keypad-btn" onclick="handleKeyInput('2')" aria-label="Enter 2">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">2</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('3')">
+      <button class="keypad-btn" onclick="handleKeyInput('3')" aria-label="Enter 3">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">3</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('4')">
+      <button class="keypad-btn" onclick="handleKeyInput('4')" aria-label="Enter 4">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">4</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('5')">
+      <button class="keypad-btn" onclick="handleKeyInput('5')" aria-label="Enter 5">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">5</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('6')">
+      <button class="keypad-btn" onclick="handleKeyInput('6')" aria-label="Enter 6">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">6</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('7')">
+      <button class="keypad-btn" onclick="handleKeyInput('7')" aria-label="Enter 7">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">7</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('8')">
+      <button class="keypad-btn" onclick="handleKeyInput('8')" aria-label="Enter 8">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">8</span>
       </button>
-      <button class="keypad-btn" onclick="handleKeyInput('9')">
+      <button class="keypad-btn" onclick="handleKeyInput('9')" aria-label="Enter 9">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">9</span>
       </button>
       <div class="keypad-empty"></div>
-      <button class="keypad-btn" onclick="handleKeyInput('0')">
+      <button class="keypad-btn" onclick="handleKeyInput('0')" aria-label="Enter 0">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num">0</span>
       </button>
-      <button class="keypad-btn keypad-backspace" onclick="handleDeleteInput()">
+      <button class="keypad-btn keypad-backspace" onclick="handleDeleteInput()" aria-label="Delete last digit">
         <svg class="heart-bg" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         <span class="btn-num"><i class="bi bi-backspace-fill"></i></span>
       </button>
     </div>
     
     <div class="pw-message" id="pw-message"></div>
-    <img class="pw-angry-gif" id="pw-angry-gif" src="angry.gif" alt="Angry reaction">
+    <img class="pw-angry-gif" id="pw-angry-gif" src="angry.gif" alt="Angry reaction" loading="lazy" decoding="async">
   </div>
 </div>
 
 <!-- ===== SUCCESS OVERLAY ===== -->
-<div class="success-overlay" id="success-overlay">
-  <img class="success-gif" src="correct.gif" alt="Correct passcode">
-  <div class="success-msg">Yay! Welcome my luv <i class="bi bi-heart-fill text-danger ms-1"></i></div>
-  <div style="color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem">You knew it all along…</div>
+<div class="success-overlay" id="success-overlay" role="status" aria-live="polite">
+  <img class="success-gif" src="correct.gif" alt="Correct passcode" loading="eager" decoding="async">
+  <div class="success-msg">Yay, pasok ka na luv <i class="bi bi-heart-fill text-danger ms-1"></i></div>
+  <div style="color:var(--text-muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.1rem">Alam ko naman alam mo 'yan...</div>
 </div>
 
 <!-- ===== BYE / RETURN OVERLAY ===== -->
-<div class="bye-overlay" id="bye-overlay">
+<div class="bye-overlay" id="bye-overlay" role="status" aria-live="polite">
   <div class="bye-gifs">
-    <img class="bye-gif" src="bye.webp" alt="Cute bye animation">
+    <img class="bye-gif" src="bye.webp" alt="Cute bye animation" loading="eager" decoding="async">
   </div>
-  <div class="bye-msg">Bye muna, biluv</div>
-  <div class="bye-sub">Balik tayo sa start... see you again in a bit.</div>
+  <div class="bye-msg">Balik muna tayo sa start, biluv</div>
+  <div class="bye-sub">Para ulitin mo ulit yung cute na entrance hehe.</div>
   <div class="bye-loading"><div class="bye-loading-fill"></div></div>
 </div>
 
@@ -2024,48 +2303,48 @@ body.unlocked #enter-btn {
 
 <!-- ===== NAVBAR ===== -->
 <nav id="navbar">
-  <div class="nav-logo">Our Story <i class="bi bi-heart-fill text-danger ms-1"></i></div>
+  <div class="nav-logo">Kwento Natin <i class="bi bi-heart-fill text-danger ms-1"></i></div>
   <ul class="nav-links">
     <li><a href="#hero">Home</a></li>
-    <li><a href="#countdown">Countdown</a></li>
+    <li><a href="#countdown">Time</a></li>
     <li><a href="#gallery">Gallery</a></li>
-    <li><a href="#reasons">Love</a></li>
+    <li><a href="#reasons">Why You</a></li>
     <li><a href="#letters">Letters</a></li>
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#final">Surprise</a></li>
+    <li><a href="#timeline">Us</a></li>
+    <li><a href="#final">Last</a></li>
   </ul>
   <div class="nav-controls">
-    <button class="icon-btn" id="back-landing-btn" title="Back to landing"><i class="bi bi-house-heart-fill"></i></button>
-    <button class="icon-btn" id="theme-toggle" title="Toggle theme"><i class="bi bi-moon-stars-fill"></i></button>
-    <button class="icon-btn hamburger" id="hamburger" title="Menu">
+    <button class="icon-btn" id="back-landing-btn" title="Back to landing" aria-label="Back to landing"><i class="bi bi-house-heart-fill"></i></button>
+    <button class="icon-btn" id="theme-toggle" title="Toggle theme" aria-label="Toggle theme"><i class="bi bi-moon-stars-fill"></i></button>
+    <button class="icon-btn hamburger" id="hamburger" title="Menu" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
  
 <!-- Mobile Menu -->
-<ul class="mobile-menu" id="mobile-menu">
+<ul class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation">
   <li><a href="#hero" onclick="closeMobileMenu()">Home</a></li>
-  <li><a href="#countdown" onclick="closeMobileMenu()">Countdown</a></li>
+  <li><a href="#countdown" onclick="closeMobileMenu()">Time</a></li>
   <li><a href="#gallery" onclick="closeMobileMenu()">Gallery</a></li>
-  <li><a href="#reasons" onclick="closeMobileMenu()">Love</a></li>
+  <li><a href="#reasons" onclick="closeMobileMenu()">Why You</a></li>
   <li><a href="#letters" onclick="closeMobileMenu()">Letters</a></li>
-  <li><a href="#timeline" onclick="closeMobileMenu()">Timeline</a></li>
-  <li><a href="#final" onclick="closeMobileMenu()">Surprise</a></li>
+  <li><a href="#timeline" onclick="closeMobileMenu()">Us</a></li>
+  <li><a href="#final" onclick="closeMobileMenu()">Last</a></li>
 </ul>
  
 <!-- ===== HERO ===== -->
 <section id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <h1 class="hero-title">Happy 3yrs. &amp; 1mos Biluv</h1>
-    <button class="enter-btn" id="enter-btn">
-      <img class="tap-gif" src="tap.gif" alt="" aria-hidden="true">
-      <span class="tap-label">tap me please</span>
+    <h1 class="hero-title">Happy 3yrs. &amp; 1mos, Biluv</h1>
+    <button class="enter-btn" id="enter-btn" aria-label="Open password screen">
+      <img class="tap-gif" src="tap.gif" alt="" aria-hidden="true" loading="eager" decoding="async">
+      <span class="tap-label">tap mo ako please</span>
     </button>
   </div>
   <div class="scroll-hint">
-    <span style="letter-spacing:0.1em">scroll</span>
+    <span style="letter-spacing:0.1em">scroll lang</span>
     <div class="scroll-arrow"></div>
   </div>
 </section>
@@ -2073,10 +2352,10 @@ body.unlocked #enter-btn {
 <!-- ===== COUNTDOWN ===== -->
 <section id="countdown">
   <div class="section-inner">
-    <div class="section-tag">Our Time Together</div>
-    <h2 class="section-title reveal">Every Second Counts</h2>
+    <div class="section-tag">Time Natin</div>
+    <h2 class="section-title reveal">Ang Tagal Na Rin Natin, No?</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Since the day you became mine, time has never felt more precious.</p>
+    <p class="section-desc reveal">Minsan bilis ng araw, minsan ang bagal, pero ang saya isipin na tayo pa rin.</p>
     <div class="countdown-wrap reveal">
       <div class="countdown-block">
         <div class="countdown-num" id="cd-months">00</div>
@@ -2099,17 +2378,17 @@ body.unlocked #enter-btn {
         <div class="countdown-label">Seconds</div>
       </div>
     </div>
-    <p class="start-date-note reveal"><i class="bi bi-heart-fill text-danger me-2"></i> Together since May 16, 2023 — the best day of my life</p>
+    <p class="start-date-note reveal"><i class="bi bi-heart-fill text-danger me-2"></i> Since May 16, 2023 — yung araw na naging tayo, and hanggang ngayon ikaw pa rin.</p>
   </div>
 </section>
 
 <!-- ===== GALLERY ===== -->
 <section id="gallery">
   <div class="section-inner">
-    <div class="section-tag">Our Memories</div>
-    <h2 class="section-title reveal">Frozen in Time</h2>
+    <div class="section-tag">Memories Natin</div>
+    <h2 class="section-title reveal">Mga Moment Na Ayokong Makalimutan</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Every photo a story, every smile a promise.</p>
+    <p class="section-desc reveal">Kahit simple lang yung iba, special pa rin sakin kasi kasama ka dun.</p>
     <div class="gallery-carousel-wrapper reveal">
       <div class="gallery-carousel-container" id="gallery-carousel-container">
         <div class="gallery-carousel-track" id="gallery-carousel-track">
@@ -2125,22 +2404,22 @@ body.unlocked #enter-btn {
 
 <!-- Lightbox -->
 <div id="lightbox">
-  <button class="lb-close" id="lb-close"><i class="bi bi-x-lg"></i></button>
-  <button class="lb-prev" id="lb-prev"><i class="bi bi-chevron-left"></i></button>
+  <button class="lb-close" id="lb-close" aria-label="Close gallery lightbox"><i class="bi bi-x-lg"></i></button>
+  <button class="lb-prev" id="lb-prev" aria-label="Previous gallery photo"><i class="bi bi-chevron-left"></i></button>
   <div class="lightbox-polaroid">
     <img id="lightbox-img" src="" alt="">
   </div>
-  <button class="lb-next" id="lb-next"><i class="bi bi-chevron-right"></i></button>
+  <button class="lb-next" id="lb-next" aria-label="Next gallery photo"><i class="bi bi-chevron-right"></i></button>
   <div class="lb-caption" id="lb-caption"></div>
 </div>
 
 <!-- ===== REASONS ===== -->
 <section id="reasons">
   <div class="section-inner">
-    <div class="section-tag">From My Heart</div>
-    <h2 class="section-title reveal">Bakit Love Na Love Kita</h2>
+    <div class="section-tag">From Me</div>
+    <h2 class="section-title reveal">Mga Reason Kung Bakit Ikaw</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Hindi ko man ma-list lahat, eto yung ilan sa mga dahilan kung bakit ikaw pa rin.</p>
+    <p class="section-desc reveal">Hindi ko kaya ilagay lahat dito, pero eto yung ilan sa mga bagay na sobrang mahal ko sayo.</p>
     <div class="reasons-grid reveal" id="reasons-grid">
       <!-- Generated by JS -->
     </div>
@@ -2150,10 +2429,10 @@ body.unlocked #enter-btn {
 <!-- ===== LETTERS ===== -->
 <section id="letters">
   <div class="section-inner">
-    <div class="section-tag">Open When…</div>
-    <h2 class="section-title reveal">Letters Galing sa Heart</h2>
+    <div class="section-tag">Open When...</div>
+    <h2 class="section-title reveal">Mga Sulat Ko Para Sayo</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Para sa mga moments na kailangan mo ng konting lambing from me.</p>
+    <p class="section-desc reveal">Para kapag kailangan mo ako, kahit through words lang muna, nandito pa rin ako.</p>
     <div class="letters-grid reveal" id="letters-grid">
       <!-- Generated by JS -->
     </div>
@@ -2162,7 +2441,7 @@ body.unlocked #enter-btn {
 
 <!-- Letter Modal (3D Envelope) -->
 <div id="letter-modal">
-  <button class="letter-close" id="letter-close"><i class="bi bi-x-lg"></i></button>
+  <button class="letter-close" id="letter-close" aria-label="Close letter"><i class="bi bi-x-lg"></i></button>
   <div class="envelope-container">
     <div class="envelope-3d" id="envelope-click-area">
       <div class="envelope-back"></div>
@@ -2175,17 +2454,17 @@ body.unlocked #enter-btn {
       <div class="envelope-pocket"></div>
       <div class="envelope-flap"></div>
     </div>
-    <button class="envelope-btn" id="envelope-open-btn">Open Letter <i class="bi bi-envelope-open-heart ms-1"></i></button>
+    <button class="envelope-btn" id="envelope-open-btn">Buksan mo hehe <i class="bi bi-envelope-open-heart ms-1"></i></button>
   </div>
 </div>
 
 <!-- ===== TIMELINE ===== -->
 <section id="timeline">
   <div class="section-inner">
-    <div class="section-tag">Our Journey</div>
-    <h2 class="section-title reveal">Kung Saan Tayo Nagsimula</h2>
+    <div class="section-tag">Kwento Natin</div>
+    <h2 class="section-title reveal">Paano Tayo Umabot Dito</h2>
     <div class="celestial-divider reveal"><span class="celestial-star">✦</span></div>
-    <p class="section-desc reveal">Mga memories natin, from simple chats hanggang sa lahat ng meron tayo ngayon.</p>
+    <p class="section-desc reveal">From simpleng chat lang dati, hanggang sa tayo na yung laging pinipili.</p>
     <div class="timeline-wrap reveal" id="timeline-wrap">
       <div class="timeline-line"></div>
       <!-- Generated by JS -->
@@ -2196,20 +2475,20 @@ body.unlocked #enter-btn {
 <!-- ===== FINAL ===== -->
 <section id="final">
   <div class="final-inner">
-    <h2 class="final-title reveal">Last Na, Promise…</h2>
+    <h2 class="final-title reveal">Last Na, Promise...</h2>
     <div id="typing-text" class="reveal"><span class="typing-cursor"></span></div>
-    <div class="final-quote reveal">"Ikaw yung favorite notification ko, favorite distraction ko, favorite everything ko."</div>
+    <div class="final-quote reveal">"Mas okay talaga lahat kapag ikaw yung kausap ko."</div>
     <br>
-    <button class="confetti-btn reveal" id="confetti-btn">
-      <i class="bi bi-balloon-fill text-warning me-2"></i> Click Me For Surprise!
+    <button class="confetti-btn reveal" id="confetti-btn" aria-label="Launch surprise confetti">
+      <i class="bi bi-balloon-fill text-warning me-2"></i> Pindutin mo 'to
     </button>
   </div>
 </section>
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  <div class="footer-brand">Our Story <i class="bi bi-heart-fill text-danger ms-1"></i></div>
-  <p>Ginawa with <span class="footer-heart"><i class="bi bi-heart-fill text-danger"></i></span> para lang sayo &nbsp;·&nbsp; Every word, totoo</p>
+  <div class="footer-brand">Kwento Natin <i class="bi bi-heart-fill text-danger ms-1"></i></div>
+  <p>Ginawa with <span class="footer-heart"><i class="bi bi-heart-fill text-danger"></i></span> para sayo lang &nbsp;·&nbsp; lahat dito, totoo</p>
 </footer>
 
 <!-- ===== MUSIC PLAYER ===== -->
@@ -2220,22 +2499,22 @@ body.unlocked #enter-btn {
         <div class="music-track" id="music-track-title">You'll Be in My Heart</div>
         <div class="music-artist" id="music-track-artist">NIKI</div>
       </div>
-      <button class="icon-btn music-upload-btn" id="music-upload-btn" title="Load MP3 files" style="width:30px; height:30px; border-radius:50%; border:1px dashed var(--border); font-size:0.8rem; display:flex; align-items:center; justify-content:center;">
+      <button class="icon-btn music-upload-btn" id="music-upload-btn" title="Load MP3 files" aria-label="Load MP3 files" style="width:30px; height:30px; border-radius:50%; border:1px dashed var(--border); font-size:0.8rem; display:flex; align-items:center; justify-content:center;">
         <i class="bi bi-cloud-upload"></i>
       </button>
-      <input type="file" id="music-file-input" accept="audio/*" multiple style="display:none;">
+      <input type="file" id="music-file-input" accept="audio/*" multiple aria-label="Upload music files" style="display:none;">
     </div>
     
     <div class="music-controls" style="display:flex; align-items:center; gap:12px; margin:8px 0;">
-      <button class="music-ctrl-btn" id="music-prev" title="Previous Song" style="color:var(--text-muted); font-size:1.1rem; padding:4px; cursor:pointer;"><i class="bi bi-skip-start-fill"></i></button>
-      <button class="music-ctrl-btn" id="music-play-toggle" title="Play/Pause" style="color:var(--pink); font-size:1.3rem; padding:4px; cursor:pointer;"><i class="bi bi-play-fill"></i></button>
-      <button class="music-ctrl-btn" id="music-next" title="Next Song" style="color:var(--text-muted); font-size:1.1rem; padding:4px; cursor:pointer;"><i class="bi bi-skip-end-fill"></i></button>
+      <button class="music-ctrl-btn" id="music-prev" title="Previous Song" aria-label="Previous song" style="color:var(--text-muted); font-size:1.1rem; padding:4px; cursor:pointer;"><i class="bi bi-skip-start-fill"></i></button>
+      <button class="music-ctrl-btn" id="music-play-toggle" title="Play/Pause" aria-label="Play or pause music" style="color:var(--pink); font-size:1.3rem; padding:4px; cursor:pointer;"><i class="bi bi-play-fill"></i></button>
+      <button class="music-ctrl-btn" id="music-next" title="Next Song" aria-label="Next song" style="color:var(--text-muted); font-size:1.1rem; padding:4px; cursor:pointer;"><i class="bi bi-skip-end-fill"></i></button>
       <span class="music-time" id="music-time" style="font-size:0.7rem; color:var(--text-muted); margin-left:auto;">0:00 / 0:00</span>
     </div>
     
     <div class="music-progress" style="cursor:pointer; height:4px; margin-top: 10px;"><div class="music-prog-fill" id="music-prog"></div></div>
   </div>
-  <button class="music-btn" id="music-btn" title="Play/Pause music"><i class="bi bi-music-note-beamed"></i></button>
+  <button class="music-btn" id="music-btn" title="Play/Pause music" aria-label="Open music player"><i class="bi bi-music-note-beamed"></i></button>
   <audio id="main-audio" loop></audio>
 </div>
 
@@ -2243,6 +2522,9 @@ body.unlocked #enter-btn {
 /* ============================
    LOADING SCREEN
 ============================ */
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
 window.addEventListener('load', () => {
   setTimeout(() => {
     document.getElementById('loading-screen').classList.add('hidden');
@@ -2255,6 +2537,8 @@ window.addEventListener('load', () => {
 const heartsBg = document.getElementById('hearts-bg');
 const heartChars = ['💕','💗','💖','✨','💫','🌟','⭐','🪐','🌙'];
 function spawnHeart() {
+  if (prefersReducedMotion || document.hidden || !document.body.classList.contains('unlocked')) return;
+  if (heartsBg.children.length > (isCoarsePointer ? 10 : 18)) return;
   const h = document.createElement('div');
   h.className = 'heart-float';
   const size = 0.7 + Math.random() * 1.4;
@@ -2266,8 +2550,7 @@ function spawnHeart() {
   heartsBg.appendChild(h);
   setTimeout(() => h.remove(), 20000);
 }
-setInterval(spawnHeart, 800);
-for(let i=0;i<6;i++) spawnHeart();
+const heartInterval = setInterval(spawnHeart, isCoarsePointer ? 1800 : 1100);
 
 /* ============================
    PARTICLES CANVAS
@@ -2280,7 +2563,7 @@ function resizeParticles() {
   pCanvas.height = window.innerHeight;
 }
 resizeParticles();
-window.addEventListener('resize', resizeParticles);
+window.addEventListener('resize', resizeParticles, { passive: true });
 class Particle {
   constructor() { this.reset(); }
   reset() {
@@ -2302,10 +2585,11 @@ class Particle {
     if(this.y < -10) this.reset();
   }
 }
-for(let i=0;i<60;i++) particles.push(new Particle());
+for(let i=0;i<(isCoarsePointer ? 24 : 48);i++) particles.push(new Particle());
 function animateParticles() {
+  if (prefersReducedMotion) return;
   pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
-  particles.forEach(p => p.draw());
+  if (!document.hidden) particles.forEach(p => p.draw());
   requestAnimationFrame(animateParticles);
 }
 animateParticles();
@@ -2314,20 +2598,32 @@ animateParticles();
    NAVBAR
 ============================ */
 const navbar = document.getElementById('navbar');
+const progressBar = document.getElementById('progress-bar');
 window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 60);
   // Progress bar
   const scrollTop = document.documentElement.scrollTop;
   const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-  document.getElementById('progress-bar').style.width = (scrollTop / scrollHeight * 100) + '%';
-});
+  progressBar.style.width = (scrollHeight > 0 ? (scrollTop / scrollHeight * 100) : 0) + '%';
+}, { passive: true });
 // Hamburger
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobile-menu');
 hamburger.addEventListener('click', () => {
   mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', mobileMenu.classList.contains('open'));
+  hamburger.setAttribute('aria-expanded', String(mobileMenu.classList.contains('open')));
+  document.body.classList.toggle('menu-open', mobileMenu.classList.contains('open'));
 });
-function closeMobileMenu() { mobileMenu.classList.remove('open'); }
+function closeMobileMenu() {
+  mobileMenu.classList.remove('open');
+  hamburger.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+}
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 768) closeMobileMenu();
+}, { passive: true });
 
 /* ============================
    THEME TOGGLE
@@ -2338,6 +2634,7 @@ themeToggle.addEventListener('click', () => {
   const next = curr === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
   themeToggle.innerHTML = next === 'dark' ? '<i class="bi bi-moon-stars-fill"></i>' : '<i class="bi bi-brightness-high-fill"></i>';
+  themeToggle.setAttribute('aria-label', next === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
 });
 
 /* ============================
@@ -2370,6 +2667,7 @@ backLandingBtn.addEventListener('click', () => {
   byeOverlay.classList.add('show');
   closeMobileMenu();
   if (typeof pauseAudio === 'function') pauseAudio();
+  if (typeof stopAutoplay === 'function') stopAutoplay();
   setTimeout(() => {
     document.body.classList.remove('unlocked');
     document.body.classList.add('scroll-locked');
@@ -2387,23 +2685,25 @@ backLandingBtn.addEventListener('click', () => {
    ============================ */
 const CORRECT_PW = '051623';
 const wrongMessages = [
-  "Wrong password 😤💢 try again luv!",
-  "Hmmmm that's not it 😠💕",
-  "Access denied cutie 🚫🥺",
-  "Are you even my luv? 😾❤️",
-  "Nope nope nope 😤🌸",
-  "That password made the hearts angry 💔😡",
-  "Almost… but not quite 🥲💔",
-  "Keep trying, luv 😤✨"
+  "Ay hindi yan, luv. Try mo ulit hehe.",
+  "Hmm close ba yan? Parang hindi ah.",
+  "Nope, hindi pa yan yung magic code.",
+  "Hala, nakalimutan mo ba? Joke lang, try again.",
+  "Mali siya, pero cute ka pa rin.",
+  "Isa pa, luv. Kaya mo yan.",
+  "Almost vibes, pero hindi pa talaga.",
+  "Sige lang, hintayin kita dito."
 ];
 let enteredPasscode = '';
 
 // Spawn floating hearts backdrop for passcode overlay
 let passcodeHeartInterval = null;
 function startPasscodeHearts() {
+  if (prefersReducedMotion) return;
   if (passcodeHeartInterval) clearInterval(passcodeHeartInterval);
   passcodeHeartInterval = setInterval(() => {
     if (!pwScreen.classList.contains('active')) return;
+    if (pwScreen.querySelectorAll('.passcode-bg-heart').length > (isCoarsePointer ? 8 : 14)) return;
     const h = document.createElement('div');
     h.className = 'heart-float passcode-bg-heart';
     h.style.left = Math.random() * 100 + 'vw';
@@ -2412,7 +2712,7 @@ function startPasscodeHearts() {
     h.textContent = ['💕','💗','💖','✨','🌟','⭐','🌙','🪐'][Math.floor(Math.random() * 8)];
     pwScreen.appendChild(h);
     setTimeout(() => h.remove(), 14000);
-  }, 500);
+  }, isCoarsePointer ? 900 : 650);
 }
 function stopPasscodeHearts() {
   if (passcodeHeartInterval) {
@@ -2476,27 +2776,30 @@ function checkPasscode() {
   const dotsWrap = document.querySelector('.passcode-dots');
   if (enteredPasscode === CORRECT_PW) {
     msg.className = 'pw-message success';
-    msg.textContent = '✓ Correct! Yay! Welcome, my luv…';
+    msg.textContent = 'Correct. Alam kong alam mo yan, luv.';
     document.getElementById('pw-angry-gif').classList.remove('show');
-    document.body.classList.remove('scroll-locked');
-    document.body.classList.add('unlocked');
     stopPasscodeHearts();
     setTimeout(() => {
       pwScreen.classList.remove('active');
       const overlay = document.getElementById('success-overlay');
       overlay.classList.add('show');
       setTimeout(() => {
+        document.body.classList.remove('scroll-locked');
+        document.body.classList.add('unlocked');
+      }, 3600);
+      setTimeout(() => {
         overlay.classList.remove('show');
-      }, 2800);
+      }, 4050);
     }, 800);
     // Trigger music autoplay safely
     setTimeout(() => {
       if (typeof playAudio === 'function') playAudio();
-    }, 1000);
+    }, 4400);
     // Trigger gallery center update
     setTimeout(() => {
       if (typeof updateCarousel === 'function') updateCarousel(true);
-    }, 900);
+      if (typeof startAutoplay === 'function') startAutoplay();
+    }, 4400);
   } else {
     dotsWrap.classList.remove('shake');
     void dotsWrap.offsetWidth;
@@ -2555,18 +2858,18 @@ setInterval(updateCountdown, 1000);
    GALLERY
 ============================ */
 const galleryData = [
-  {emoji:'📸', img:'1.JPG'},
-  {emoji:'🌅', img:'2.JPG'},
-  {emoji:'🍜', img:'3.JPG'},
-  {emoji:'🎮', img:'4.JPG'},
-  {emoji:'☕', img:'5.JPG'},
-  {emoji:'🌸', img:'6.jpg'},
-  {emoji:'🎵', img:'7.jpg'},
-  {emoji:'🌙', img:'8.JPG'},
-  {emoji:'🍕', img:'9.jpg'},
-  {emoji:'💐', img:'10.jpg'},
-  {emoji:'🎠', img:'11.jpg'},
-  {emoji:'🤗', img:'12.jpg'},
+  {emoji:'📸', img:'1.JPG', caption:'Isa sa mga moment na simple lang, pero ang saya balikan.'},
+  {emoji:'🌅', img:'2.JPG', caption:'Yung ganitong araw, mas okay kasi ikaw kasama ko.'},
+  {emoji:'🍜', img:'3.JPG', caption:'Food trip, kwento, kulit — very us.'},
+  {emoji:'🎮', img:'4.JPG', caption:'Kahit ano gawin natin, basta ikaw, hindi boring.'},
+  {emoji:'☕', img:'5.JPG', caption:'Quiet moment lang, pero ang warm sa feeling.'},
+  {emoji:'🌸', img:'6.jpg', caption:'Ang cute isipin na may ganito tayong memory.'},
+  {emoji:'🎵', img:'7.jpg', caption:'May mga araw talaga na parang song lang natin yung mundo.'},
+  {emoji:'🌙', img:'8.JPG', caption:'Soft lang. Calm lang. Tayo lang.'},
+  {emoji:'🍕', img:'9.jpg', caption:'Random moments natin na biglang nagiging favorite ko.'},
+  {emoji:'💐', img:'10.jpg', caption:'Ito yung mga bagay na gusto kong i-keep forever.'},
+  {emoji:'🎠', img:'11.jpg', caption:'Ang saya mo mahalin, kahit minsan ang kulit mo.'},
+  {emoji:'🤗', img:'12.jpg', caption:'Pag ikaw kasama, parang mas magaan lahat.'},
 ];
 const carouselContainer = document.getElementById('gallery-carousel-container');
 const carouselTrack = document.getElementById('gallery-carousel-track');
@@ -2603,22 +2906,32 @@ trackItems.forEach((item, idx) => {
   // Selection overlay for side cards
   const overlay = document.createElement('div');
   overlay.className = 'gallery-slide-overlay';
+  overlay.setAttribute('role', 'button');
+  overlay.setAttribute('tabindex', '0');
+  overlay.setAttribute('aria-label', `View memory ${item.originalIndex + 1}`);
   overlay.addEventListener('click', (e) => {
     e.stopPropagation();
     currentIndex = item.originalIndex;
     updateCarousel();
     startAutoplay();
   });
+  overlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      overlay.click();
+    }
+  });
   
   // Gallery Card itself
   const card = document.createElement('div');
   card.className = 'gallery-item';
+  const caption = item.caption || `Memory ${item.originalIndex + 1}`;
   
   const contentHTML = item.img 
-    ? `<img src="${item.img}" alt="${item.caption}">`
+    ? `<img src="${item.img}" alt="${caption}" loading="lazy" decoding="async">`
     : `<div class="gallery-placeholder">
         <div class="emoji">${item.emoji}</div>
-        <span>Add your photo here</span>
+        <span>Memory natin dito</span>
       </div>`;
       
   card.innerHTML = contentHTML; // Render raw images only (no text overlays inside the card)
@@ -2639,10 +2952,19 @@ trackItems.forEach((item, idx) => {
 galleryData.forEach((item, idx) => {
   const dot = document.createElement('div');
   dot.className = 'carousel-dot';
+  dot.setAttribute('role', 'button');
+  dot.setAttribute('tabindex', '0');
+  dot.setAttribute('aria-label', `Go to memory ${idx + 1}`);
   dot.addEventListener('click', () => {
     currentIndex = idx;
     updateCarousel();
     startAutoplay();
+  });
+  dot.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      dot.click();
+    }
   });
   dotsContainer.appendChild(dot);
 });
@@ -2679,7 +3001,9 @@ function updateCarousel(snapImmediately = false) {
   if (dotIndex >= N) dotIndex = 0;
   if (dotIndex < 0) dotIndex = N - 1;
   dots.forEach((dot, idx) => {
-    dot.classList.toggle('active', idx === dotIndex);
+    const isActive = idx === dotIndex;
+    dot.classList.toggle('active', isActive);
+    dot.setAttribute('aria-current', isActive ? 'true' : 'false');
   });
 }
 
@@ -2765,6 +3089,7 @@ carouselContainer.addEventListener('touchend', dragEnd);
 let autoplayTimer = null;
 function startAutoplay() {
   stopAutoplay();
+  if (prefersReducedMotion || document.hidden || !document.body.classList.contains('unlocked')) return;
   autoplayTimer = setInterval(() => {
     currentIndex = currentIndex + 1;
     updateCarousel();
@@ -2776,6 +3101,10 @@ function stopAutoplay() {
     autoplayTimer = null;
   }
 }
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) stopAutoplay();
+  else startAutoplay();
+});
 
 // Navigation Buttons
 prevBtn.addEventListener('click', () => {
@@ -2795,14 +3124,15 @@ carouselContainer.addEventListener('mouseenter', stopAutoplay);
 carouselContainer.addEventListener('mouseleave', startAutoplay);
 
 // Window Resize Handling
+let carouselResizeTimer = null;
 window.addEventListener('resize', () => {
-  updateCarousel(true);
-});
+  clearTimeout(carouselResizeTimer);
+  carouselResizeTimer = setTimeout(() => updateCarousel(true), 120);
+}, { passive: true });
 
 // Setup active layout initially & start autoplay
 setTimeout(() => {
   updateCarousel(true);
-  startAutoplay();
 }, 150);
 
 // Carousel transitions are handled after successful unlock in checkPasscode
@@ -2814,15 +3144,17 @@ function openLightbox(idx) {
   
   const lb = document.getElementById('lightbox');
   const imgEl = document.getElementById('lightbox-img');
+  const caption = galleryData[idx].caption || `Memory natin #${idx + 1}`;
   
   if (galleryData[idx].img) {
     imgEl.src = galleryData[idx].img;
   } else {
-    imgEl.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' style='background:%230C0E1A'><text x='50%25' y='45%25' font-size='120' text-anchor='middle' dominant-baseline='middle'>${encodeURIComponent(galleryData[idx].emoji)}</text><text x='50%25' y='75%25' font-size='20' fill='%23E9F6FF' text-anchor='middle' dominant-baseline='middle' font-family='Georgia'>${encodeURIComponent(galleryData[idx].caption)}</text></svg>`;
+    imgEl.src = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='400' style='background:%230C0E1A'><text x='50%25' y='45%25' font-size='120' text-anchor='middle' dominant-baseline='middle'>${encodeURIComponent(galleryData[idx].emoji)}</text><text x='50%25' y='75%25' font-size='20' fill='%23E9F6FF' text-anchor='middle' dominant-baseline='middle' font-family='Georgia'>${encodeURIComponent(caption)}</text></svg>`;
   }
   
-  document.getElementById('lb-caption').textContent = galleryData[idx].caption;
+  document.getElementById('lb-caption').textContent = caption;
   lb.classList.add('open');
+  imgEl.alt = caption;
 }
 
 document.getElementById('lb-close').addEventListener('click', () => {
@@ -2844,15 +3176,15 @@ document.getElementById('lightbox').addEventListener('click', e => {
    REASONS WHY I LOVE YOU
 ============================ */
 const reasons = [
-  {icon:'bi-emoji-laughing-fill', title:'Tawa Mo', text:'Yung tawa mo, kahit simpleng moment lang, nagiging favorite part ko agad ng araw.'},
-  {icon:'bi bi-shield-shaded', title:'Lakas Mo', text:'Kahit may hard days, you still keep going. Nakaka-proud ka, sobra.'},
-  {icon:'bi-lightbulb-fill', title:'Mind Mo', text:'Ang ganda ng way mo mag-isip, mangarap, at tumingin sa mundo. I love that about you.'},
-  {icon:'bi-heart-fill', title:'Kabaitan Mo', text:'Ang soft ng heart mo, and I feel so lucky na may space ako sa loob nun.'},
-  {icon:'bi-stars', title:'Smile Mo', text:'Isang smile mo lang, okay na agad mood ko. Parang instant reset button.'},
-  {icon:'bi-chat-dots-fill', title:'Late Night Talks', text:'Kahit antok na, talking to you still feels easy, warm, and worth it.'},
-  {icon:'bi-fire', title:'Passion Mo', text:'Kapag kinukwento mo yung mga gusto mo, kita ko yung spark sa eyes mo. Ang cute, sobra.'},
-  {icon:'bi-house-heart-fill', title:'Comfort Mo', text:'With you, everything feels calmer. Parang pahinga ka sa magulong mundo.'},
-  {icon:'bi-brightness-high-fill', title:'Warmth Mo', text:'Yung presence mo pa lang, gumagaan na pakiramdam ko. Ikaw yung safe place ko.'},
+  {icon:'bi-emoji-laughing-fill', title:'Tawa Mo', text:'Pag tumatawa ka, nahahawa ako agad. Kahit bad mood ako, biglang okay na.'},
+  {icon:'bi bi-shield-shaded', title:'Lakas Mo', text:'Alam kong may days na mahirap, pero lumalaban ka pa rin. Proud ako sayo, sobra.'},
+  {icon:'bi-lightbulb-fill', title:'Utak Mo', text:'Ang cute ng way mo mag-isip. Minsan random, minsan deep, pero laging ikaw na ikaw.'},
+  {icon:'bi-heart-fill', title:'Puso Mo', text:'Ang lambot ng heart mo, kahit hindi mo lagi pinapakita. I really love that about you.'},
+  {icon:'bi-stars', title:'Smile Mo', text:'Yung smile mo, simple lang pero grabe effect sakin. Parang pahinga.'},
+  {icon:'bi-chat-dots-fill', title:'Kwentuhan Natin', text:'Kahit wala namang big topic, gusto pa rin kitang kausap. Ang gaan lang.'},
+  {icon:'bi-fire', title:'Pag May Gusto Ka', text:'Ang cute mo pag excited ka sa something. Kita ko agad sa energy mo.'},
+  {icon:'bi-house-heart-fill', title:'Comfort Mo', text:'Parang sayo lang ako pinaka-comfortable maging ako. Walang pilit.'},
+  {icon:'bi-brightness-high-fill', title:'Presence Mo', text:'Kahit message mo lang, gumagaan na pakiramdam ko. Ang unfair mo dun ha.'},
 ];
 const reasonsGrid = document.getElementById('reasons-grid');
 reasons.forEach((r, i) => {
@@ -2869,7 +3201,7 @@ reasons.forEach((r, i) => {
 });
 const moreReasonsNote = document.createElement('p');
 moreReasonsNote.className = 'start-date-note reveal';
-moreReasonsNote.textContent = 'AND MOREEEEEEEEEEE💗';
+moreReasonsNote.textContent = 'At marami pa yan, kulang talaga space dito.';
 reasonsGrid.insertAdjacentElement('afterend', moreReasonsNote);
 observer.observe(moreReasonsNote);
 
@@ -2877,19 +3209,54 @@ observer.observe(moreReasonsNote);
    OPEN WHEN LETTERS
 ============================ */
 const letters = [
-  {icon:'bi-telephone-fill', when:'Open when you miss me', title:'Kapag Namimiss Mo Ako', text:'Close your eyes muna. Imagine mo nandiyan lang ako, kausap ka, kinukulit ka, at pinaparamdam na hindi ka nag-iisa. Namimiss din kita, palagi. Konting tiis lang, magkikita rin tayo ulit. For now, remember na ikaw lagi nasa isip ko. 💕'},
-  {icon:'bi-cloud-rain-fill', when:'Open when you\'re sad', title:'Kapag Sad Ka', text:'Luv, okay lang mapagod. Okay lang umiyak. Hindi mo kailangan maging strong every time. I wish I could hug you right now, pero habang wala ako diyan, please remember na mahal na mahal kita. Lilipas din yan, and I\'m always here for you. ☁️➡️🌈'},
-  {icon:'bi-lightning-charge-fill', when:'Open when you need motivation', title:'Kaya Mo Yan', text:'Luv, listen. Kaya mo yan. You\'ve handled so many things already, and I know you can handle this too. Step by step lang. I\'m proud of you kahit hindi mo pa tapos lahat. Go, Luv. I\'m cheering for you. 🔥'},
-  {icon:'bi-heartbreak-fill', when:'Open when you\'re mad at me', title:'Kapag Galit Ka Sa Akin', text:'I know may times na nagkakamali ako, and I never want you to feel unheard. Your feelings matter to me. Usap tayo kapag ready ka na, okay? Mas mahalaga ka sa akin kaysa sa pride ko. I love you, kahit may tampuhan. 🤍'},
-  {icon:'bi-star-fill', when:'Open when you need a reminder', title:'Reminder Lang', text:'In case nakakalimutan mo, you are so loved. Ang galing mo, ang bait mo, and you make ordinary days feel special. Huwag mong i-down sarili mo, okay? I see you, and I\'m always proud of you. ✨'},
-  {icon:'bi-cake2-fill', when:'Open when it\'s a special day', title:'For Your Special Day', text:'Today is yours, so enjoy mo lang. Celebrate kahit simple lang, kasi deserve mo yan. Eat something you like, smile a lot, and let yourself feel loved. I\'m so happy I get to celebrate you. 🎂🎊'},
-  {icon:'bi-moon-stars-fill', when:'Open when you can\'t sleep', title:'Kapag Hindi Ka Makatulog', text:'Hey sleepyhead, breathe lang. Hayaan mo muna yung thoughts mo mag-slow down. Imagine mo hawak ko kamay mo and sinasabi ko na okay ka, safe ka, and tomorrow is another chance. Good night, luv. 🌙'},
-  {icon:'bi-cup-hot-fill', when:'Open when you\'re hungry or indecisive', title:'Kapag Gutom Ka', text:'Kung gutom ka, kumain ka na please. Kung hindi ka makapili, pick the one na nagpapasaya sayo today. Potato Corner? Shawarma? Comfort food? Go lang, deserve mo yan. Enjoy every bite, my luv. 🍕🍰'}
+  {icon:'bi-telephone-fill', when:'Open when you miss me', title:'Kapag Namimiss Mo Ako', text:`Luv, kung namimiss mo ako, same. As in same na same. May mga oras talaga na gusto ko na lang bigla kang makausap, makita, or kahit marinig lang boses mo saglit.
+
+Sana nandiyan ako para kulitin ka, hawakan kamay mo, or tumabi lang sayo kahit tahimik tayo pareho. Yung simple lang, pero enough na kasi ikaw yun.
+
+For now, isipin mo muna na yakap kita. Konting tiis lang, magkikita rin tayo ulit. And habang wala pa yun, message mo lang ako ha. Gusto ko pa rin maramdaman na hinahanap mo ako.`},
+  {icon:'bi-cloud-rain-fill', when:'Open when you\'re sad', title:'Kapag Mabigat Yung Araw Mo', text:`Hi luv. Hindi mo kailangan maging okay agad. Pwede ka mapagod, pwede ka umiyak, pwede ka munang tahimik. Hindi mo kailangan ipaliwanag lahat agad kung wala ka pang energy.
+
+Hindi ka burden sakin, okay? Kahit paulit-ulit mo pa sabihin yung nararamdaman mo, makikinig pa rin ako. Hindi ako magsasawa intindihin ka, lalo na kapag ikaw yung nahihirapan.
+
+Kung nandiyan lang ako, niyayakap na kita. For now, breathe ka muna. Dito lang ako, kahit slow replies, kahit messy thoughts, kahit hindi mo alam sasabihin. Hindi kita iiwan sa mabigat na araw mo.`},
+  {icon:'bi-lightning-charge-fill', when:'Open when you need motivation', title:'Kaya Mo Yan, Promise', text:`Alam kong nakakapagod minsan. Yung parang ang dami mong kailangan gawin, tapos hindi mo alam saan magsisimula. Pero luv, tingnan mo nga kung gaano na karami yung nalampasan mo.
+
+Hindi kailangan perfect agad. One step lang muna. Kahit maliit na progress, progress pa rin yan. Wag mong maliitin yung effort mo just because pagod ka or mabagal yung pace.
+
+Proud ako sayo, kahit hindi mo pa tapos lahat. Proud ako sayo kahit sinusubukan mo pa lang. Kaya mo yan, and kahit hindi mo kaya mag-isa today, nandito ako para alalayan ka.`},
+  {icon:'bi-heartbreak-fill', when:'Open when you\'re mad at me', title:'Kapag Naiinis Ka Sakin', text:`Sorry kung may nagawa akong nakasakit, nakainis, or nakapagpa-feel sayo na hindi kita naiintindihan. Ayokong ma-feel mo na maliit lang yung nararamdaman mo, kasi hindi.
+
+Valid ka, luv. Valid yung tampo mo, inis mo, or lungkot mo. Hindi ko gustong manalo sa argument kung kapalit nun mas masasaktan ka lang. Mas importante ka sakin kaysa pride ko.
+
+Kapag ready ka na, usap tayo nang maayos. Hindi para sisihin isa't isa, kundi para mas maintindihan kita. Kahit may tampuhan, mahal pa rin kita, and pipiliin pa rin kitang ayusin.`},
+  {icon:'bi-star-fill', when:'Open when you need a reminder', title:'Reminder Para Sayo', text:`Reminder lang, luv: ang galing mo, kahit hindi mo laging nakikita. Ang bait ng puso mo, kahit minsan pagod ka na. And ang dami mong worth kahit may days na feeling mo kulang ka.
+
+Hindi mo kailangan laging strong, laging productive, or laging okay para maging lovable. Kahit tahimik ka, pagod ka, emotional ka, ikaw pa rin yan. And mahalaga ka pa rin.
+
+May tao dito na sobrang thankful kasi nandiyan ka. Ako yun. So please be softer with yourself today. Kung kaya mong maging gentle sa ibang tao, deserve mo rin yun from yourself.`},
+  {icon:'bi-cake2-fill', when:'Open when it\'s a special day', title:'Special Day Mo', text:`Today, hayaan mo namang ikaw muna. Wag mo munang isipin kung deserve mo ba mag-enjoy, kasi oo, deserve mo talaga. Kahit simple celebration lang, gusto kong ma-feel mo na special ka.
+
+Kumain ka ng gusto mo, magpahinga ka kung kailangan, mag-picture ka kung cute ka, and smile ka kahit konti. I hope today treats you gently.
+
+Sana nandiyan ako para i-celebrate ka in person. Pero kahit wala ako beside you right now, please know na happy ako for you, proud ako sayo, and grateful ako na I get to love you.`},
+  {icon:'bi-moon-stars-fill', when:'Open when you can\'t sleep', title:'Kapag Hindi Ka Makatulog', text:`Hi sleepyhead. Breathe lang muna. Inhale, exhale. Bitawan mo muna kahit konti yung iniisip mo. Hindi mo kailangan solusyonan lahat ngayong gabi.
+
+Imagine mo katabi mo ako, kinukulit ka nang slight, tapos biglang magiging quiet kasi inaantok na rin ako. Hawak ko kamay mo, tapos sasabihin ko lang na okay ka, safe ka, and bukas na natin isipin yung iba.
+
+Rest ka na, luv. Deserve ng mind mo magpahinga. Sana panaginipan mo something soft. And if hindi ka pa rin makatulog, message mo ako. Dito lang ako.`},
+  {icon:'bi-cup-hot-fill', when:'Open when you\'re hungry or indecisive', title:'Kapag Gutom Ka', text:`Luv, kumain ka na please. Wag puro “mamaya na” kasi kilala kita. Kapag gutom ka, nagiging extra tahimik ka or extra sungit, and cute man yun, kailangan mo pa rin kumain.
+
+Kung hindi ka makapili, piliin mo yung comfort food mo today. Yung food na hindi ka na masyadong mag-iisip, basta mapapasabi ka na “okay, worth it.” Deserve mo yan.
+
+Tapos kwento mo sakin kung masarap, para kunwari kasama ako. Send ka picture kung kaya. Gusto ko pa rin maging part ng small moments mo, kahit pagkain lang yan.`}
 ];
 const lettersGrid = document.getElementById('letters-grid');
 letters.forEach((l, i) => {
   const card = document.createElement('div');
   card.className = 'letter-card reveal';
+  card.setAttribute('role', 'button');
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', l.when);
   card.innerHTML = `
     <div class="mini-envelope">
       <div class="mini-envelope-flap"></div>
@@ -2900,11 +3267,17 @@ letters.forEach((l, i) => {
       </div>
     </div>
     <div class="mini-envelope-meta">
-      <div class="letter-when">Open when…</div>
+      <div class="letter-when">Open kapag...</div>
       <div class="letter-title">${l.when.replace('Open when ','')}</div>
     </div>
   `;
   card.addEventListener('click', () => openLetter(i));
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openLetter(i);
+    }
+  });
   lettersGrid.appendChild(card);
   observer.observe(card);
 });
@@ -2989,13 +3362,13 @@ document.getElementById('letter-modal').addEventListener('click', e => {
    TIMELINE
 ============================ */
 const timelineEvents = [
-  {icon:'bi-chat-heart-fill', date:'April 08, 2023', event:'Doon Nagsimula', note:'Yung araw na nag-send ka ng wave sa Messenger. Simple lang, pero special pala.'},
-  {icon:'bi-calendar-heart-fill', date:'May 16, 2023', event:'The Day We Said Yes', note:'Yung araw na naging tayo. Since then, ikaw na yung favorite person ko.'},
-  {icon:'bi-balloon-heart-fill', date:'May 16, 2024', event:'First Anniversary Natin', note:'One year of us, puno ng memories, lambing, kulit, at love.'},
-  {icon:'bi-stars', date:'May 16, 2025', event:'Second Anniversary Natin', note:'Two years na, and somehow mas lalo pa kitang minahal.'},
-  {icon:'bi-infinity', date:'May 16, 2026', event:'Third Anniversary Natin', note:'Three years of choosing each other, kahit may ups and downs.'},
-  {icon:'bi-sunrise-fill', date:'June 16, 2026', event:'First Monthsary Again', note:'3 years and 1 month na tayo, and yes, ikaw pa rin pipiliin ko.'},
-  {icon:'bi-gem', date:'Today', event:'Right Here, Right Now', note:'And today, same pa rin: mahal kita, pinipili kita, araw-araw.'},
+  {icon:'bi-chat-heart-fill', date:'April 08, 2023', event:'Yung Unang Spark', note:'Isang wave lang sa Messenger, pero doon pala magsisimula yung favorite kong kwento.'},
+  {icon:'bi-calendar-heart-fill', date:'May 16, 2023', event:'Naging Tayo', note:'Yung araw na naging official tayo. Hanggang ngayon, kinikilig pa rin ako isipin.'},
+  {icon:'bi-balloon-heart-fill', date:'May 16, 2024', event:'First Year Natin', note:'One year of kulit, tampuhan, lambing, and choosing each other kahit hindi perfect lahat.'},
+  {icon:'bi-stars', date:'May 16, 2025', event:'Second Year Natin', note:'Mas kilala na natin isa\'t isa, and somehow mas lalo pa kitang ginusto sa buhay ko.'},
+  {icon:'bi-infinity', date:'May 16, 2026', event:'Third Year Natin', note:'Three years na. Ang dami na nating pinagdaanan, pero ang saya kasi tayo pa rin.'},
+  {icon:'bi-sunrise-fill', date:'June 16, 2026', event:'3 Years and 1 Month', note:'Another month with you. Simple pakinggan, pero big deal sakin palagi.'},
+  {icon:'bi-gem', date:'Today', event:'Ngayon', note:'And today, same pa rin. Ikaw pa rin yung gusto kong kausap, kakampi, at kasama.'},
 ];
 const timelineWrap = document.getElementById('timeline-wrap');
 timelineEvents.forEach((ev, i) => {
@@ -3026,7 +3399,7 @@ timelineEvents.forEach((ev, i) => {
 /* ============================
    TYPING EFFECT - FINAL
 ============================ */
-const finalMessage = `My luv,\n\nGinawa ko 'to para sayo kasi gusto kong may something ka na mababalikan kapag gusto mo ng konting kilig, comfort, or reminder na mahal na mahal kita.\n\nHindi man perfect lahat ng araw natin, pero ikaw pa rin yung gusto kong kausap, kakulitan, kaaway minsan, at kasama sa lahat ng simple moments.\n\nThank you for staying, for choosing me, and for making life feel lighter just by being there.\n\nI don't know everything about the future, pero alam ko na gusto kitang kasama doon. Sa happy days, sa quiet days, pati sa days na kailangan lang natin magpahinga.\n\nHappy monthsary, biluv. Ikaw pa rin. Always.\n\nForever yours,\nThe one who loves you most. 💕`;
+const finalMessage = `Hi luv,\n\nGinawa ko 'to kasi gusto kong may maliit kang place na mababalikan kapag namimiss mo ako, kapag need mo ng lambing, or kapag gusto mo lang maalala na may taong sobrang thankful sayo.\n\nHindi naman tayo perfect. May tampuhan, may kulit, may days na pagod tayo pareho. Pero kahit ganun, ikaw pa rin yung gusto kong kausap sa dulo ng araw.\n\nAng daming simpleng moments natin na hindi big deal sa iba, pero sakin ang special. Yung kwentuhan, asaran, food trip, random updates, kahit yung wala lang tayong ginagawa. Mas okay talaga lahat kapag ikaw kasama ko.\n\nThank you kasi nandiyan ka. Thank you kasi pinipili mo pa rin ako. Thank you kasi with you, parang mas comfortable ako maging ako.\n\nHappy monthsary, biluv. Hindi ko man laging nasasabi nang maayos, pero sobrang mahalaga ka sakin. Ikaw pa rin yung gusto kong kakampi, kakulitan, at pahinga.\n\nDito lang ako, palagi.\n\n- yung taong clingy sayo`;
 
 let typingStarted = false;
 const typingEl = document.getElementById('typing-text');
@@ -3066,7 +3439,7 @@ function resizeConf() {
   confCanvas.height = window.innerHeight;
 }
 resizeConf();
-window.addEventListener('resize', resizeConf);
+window.addEventListener('resize', resizeConf, { passive: true });
 class ConfettiPiece {
   constructor() {
     this.x = Math.random() * confCanvas.width;
@@ -3098,9 +3471,10 @@ class ConfettiPiece {
   }
 }
 function launchConfetti() {
-  if(confettiRunning) return;
+  if(confettiRunning || prefersReducedMotion) return;
   confettiRunning = true;
-  for(let i=0;i<150;i++) {
+  const totalConfetti = isCoarsePointer ? 90 : 140;
+  for(let i=0;i<totalConfetti;i++) {
     setTimeout(() => confettiPieces.push(new ConfettiPiece()), i * 15);
   }
   function animConf() {
@@ -3175,11 +3549,13 @@ function playAudio() {
     isPlaying = true;
     musicBtn.classList.add('playing');
     playToggleBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
+    playToggleBtn.setAttribute('aria-label', 'Pause music');
+    musicBtn.setAttribute('aria-label', 'Open music player, music playing');
   }).catch(err => {
     console.log("Playback failed or user interaction required:", err);
     // If it's a local file that doesn't exist, we show a nice error/tip
     if (!playlist[currentTrackIdx].custom) {
-      trackArtist.innerHTML = `${playlist[currentTrackIdx].artist} <span style="color:var(--rose); font-size:0.65rem; display:block; margin-top:2px;">(Add MP3 to folder or click upload)</span>`;
+      trackArtist.innerHTML = `${playlist[currentTrackIdx].artist} <span style="color:var(--rose); font-size:0.65rem; display:block; margin-top:2px;">(Upload mo yung song kung hindi tumugtog)</span>`;
     }
   });
 }
@@ -3189,6 +3565,8 @@ function pauseAudio() {
   isPlaying = false;
   musicBtn.classList.remove('playing');
   playToggleBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
+  playToggleBtn.setAttribute('aria-label', 'Play music');
+  musicBtn.setAttribute('aria-label', 'Open music player, music paused');
 }
 
 function togglePlay() {
@@ -3322,6 +3700,7 @@ loadTrack(0);
 document.addEventListener('keydown', e => {
   if(e.key === 'Escape') {
     document.getElementById('lightbox').classList.remove('open');
+    closeMobileMenu();
     if (document.getElementById('letter-modal').classList.contains('open')) {
       closeLetterModal();
     }
@@ -3332,8 +3711,10 @@ document.addEventListener('keydown', e => {
   
   if (document.getElementById('password-screen').classList.contains('active')) {
     if (e.key >= '0' && e.key <= '9') {
+      e.preventDefault();
       handleKeyInput(e.key);
     } else if (e.key === 'Backspace') {
+      e.preventDefault();
       handleDeleteInput();
     }
   }
@@ -3363,12 +3744,17 @@ document.getElementById('lightbox').addEventListener('touchend', e => {
 /* ============================
    PARALLAX ON HERO
 ============================ */
+const hero = document.getElementById('hero');
+const heroBg = hero ? hero.querySelector('.hero-bg') : null;
+let parallaxTicking = false;
 window.addEventListener('scroll', () => {
-  const hero = document.getElementById('hero');
-  const scrolled = window.scrollY;
-  const heroBg = hero.querySelector('.hero-bg');
-  if(heroBg) heroBg.style.transform = `translateY(${scrolled * 0.35}px)`;
-});
+  if (prefersReducedMotion || !heroBg || parallaxTicking) return;
+  parallaxTicking = true;
+  requestAnimationFrame(() => {
+    heroBg.style.transform = `translate3d(0, ${window.scrollY * (isCoarsePointer ? 0.18 : 0.32)}px, 0)`;
+    parallaxTicking = false;
+  });
+}, { passive: true });
 
 /* Make password screen initially hidden so hero shows first */
 /* It's only shown after clicking enter button */
